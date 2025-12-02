@@ -153,7 +153,7 @@ export default function Hero() {
                     {/* Download Resume - Silver Outline */}
                     <a
                         href="/resume.pdf"
-                        download="Yashvir_Resume.pdf"
+                        download="Resume.pdf"
                         className={`group relative px-10 py-3 overflow-hidden rounded-xl transition-all duration-300 hover:scale-105 ${!isRecruiterMode ? 'phial-glow' : ''}`}
                     >
                         <div className="absolute inset-0 border-2 border-silver-gleam/50 rounded-xl group-hover:border-silver-gleam transition-colors" />
