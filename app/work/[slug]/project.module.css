@@ -1,66 +1,80 @@
 .container {
-  padding: 12rem 4rem 12rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  padding: 10vh 0 20vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.topMeta {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  margin-bottom: 20vh;
+  opacity: 0.5;
 }
 
 .header {
-  margin-bottom: 6rem;
-  max-width: 1200px;
+  padding: 0 5vw;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.meta {
-  display: flex;
-  gap: 3rem;
-  color: var(--muted);
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1rem;
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 15vw, 12rem);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+  margin-left: -5vw;
+  align-self: flex-start;
 }
 
 .statement {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(1.5rem, 4vw, 3rem);
-  margin-top: 4rem;
+  margin-top: 10vh;
   color: var(--muted);
-  max-width: 1000px;
+  max-width: 800px;
+  text-align: right;
 }
 
 .heroVisual {
-  width: 100%;
+  width: 90vw;
+  margin-left: 10vw;
   aspect-ratio: 21/9;
   background-color: var(--surface);
-  margin-bottom: 15rem;
+  margin-bottom: 20vh;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 15rem;
-  max-width: 1000px;
+  gap: 20vh;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 5vw;
 }
 
 .chapter {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 4rem;
+  gap: 5vw;
   align-items: flex-start;
 }
 
 .chapter h2 {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 4rem);
   color: var(--muted);
   margin: 0;
-  text-align: right;
 }
 
 .chapter p {
   font-size: 1.25rem;
-  line-height: 2;
+  line-height: 2.2;
   color: var(--foreground);
 }
 
@@ -68,21 +82,5 @@
   .chapter {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
-  .chapter h2 {
-    text-align: left;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 10rem 2rem 6rem;
-  }
-  .meta {
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-  .content {
-    gap: 8rem;
   }
 }

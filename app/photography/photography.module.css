@@ -1,35 +1,41 @@
 .container {
-  padding: 15rem 4rem 10rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  padding: 10vh 0 20vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.topMeta {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  margin-bottom: 20vh;
+  opacity: 0.3;
 }
 
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: 20rem; /* Massive gaps to force scrolling through the archive */
+  gap: 30vh;
 }
 
 .photoItem {
-  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
-/* Irregular Sizing */
-.large {
-  width: 90%;
-  align-self: flex-start;
+.massive {
+  width: 120vw;
+  margin-left: -10vw;
 }
 
 .standard {
-  width: 50%;
+  width: 70vw;
+  margin-left: 5vw;
 }
 
-/* Offset positioning */
-.offset {
-  align-self: flex-end;
+.right {
+  margin-left: 25vw;
 }
 
 .imagePlaceholder {
@@ -38,45 +44,34 @@
   background-color: var(--surface);
 }
 
+/* Specific crops/ratios could be handled via additional classes */
+
 .caption {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  opacity: 0.6;
-  transition: opacity 0.5s ease;
+  gap: 1rem;
+  margin-top: 4rem;
+  margin-left: 5vw;
+  opacity: 0.8;
+  max-width: 500px;
 }
 
-.photoItem:hover .caption {
-  opacity: 1;
-}
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  color: var(--muted);
+.massive .caption {
+  margin-left: 15vw; /* compensate for the negative margin of the massive image */
 }
 
 .captionText {
   font-family: var(--font-serif);
   font-size: 1.5rem;
   color: var(--foreground);
-  max-width: 500px;
-}
-
-@media (max-width: 1024px) {
-  .large, .standard {
-    width: 100%;
-    align-self: center;
-  }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 10rem 2rem 5rem;
+  .massive, .standard, .right {
+    width: 100vw;
+    margin-left: 0;
   }
-  .gallery {
-    gap: 10rem;
+  .massive .caption {
+    margin-left: 5vw;
   }
 }

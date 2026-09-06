@@ -16,23 +16,20 @@ export default async function WritingPiece({ params }) {
 
   return (
     <article className={styles.container}>
-      <div className={styles.metaColumn}>
-        <span className="text-mono">{piece.year}</span>
-        <span className="text-mono">{piece.type}</span>
+      <div className={`${styles.ambientMeta} text-mono fade-in`} style={{ animationDelay: '3s' }}>
+        ARCHIVE / {piece.year} / {piece.type}
       </div>
 
-      <div className={styles.contentColumn}>
-        <header className={styles.header}>
-          <h1 className={`${styles.title} fade-in`}>{piece.title}</h1>
-        </header>
+      <header className={styles.header}>
+        <h1 className={`${styles.title} fade-in`}>{piece.title}</h1>
+      </header>
 
-        <div className={`${styles.content} fade-in`} style={{ animationDelay: '0.5s' }}>
-          {piece.content.split('\n').map((line, i) => (
-            <p key={i} className={line.trim() === '' ? styles.emptyLine : ''}>
-              {line}
-            </p>
-          ))}
-        </div>
+      <div className={`${styles.content} fade-in`} style={{ animationDelay: '1s' }}>
+        {piece.content.split('\n').map((line, i) => (
+          <p key={i} className={line.trim() === '' ? styles.emptyLine : ''}>
+            {line}
+          </p>
+        ))}
       </div>
     </article>
   );

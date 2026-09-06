@@ -1,34 +1,43 @@
 .container {
-  padding: 15rem 4rem 10rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 10vh 0 20vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.topMeta {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  margin-bottom: 10vh;
+  opacity: 0.3;
 }
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8rem;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 10vw;
   align-items: center;
+  padding: 0 5vw;
 }
 
 .portrait {
   width: 100%;
   aspect-ratio: 3/4;
   background-color: var(--surface);
-  /* Intentionally offset to feel like a documentary scan */
-  transform: rotate(-1deg);
+  /* documentary style slight tilt */
+  transform: rotate(-1.5deg);
 }
 
 .textSection {
-  max-width: 600px;
+  max-width: 700px;
 }
 
 .intro {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.4;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.3;
   color: var(--foreground);
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 .body {
@@ -39,14 +48,14 @@
 }
 
 .links {
-  margin-top: 6rem;
+  margin-top: 8rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
 .links a {
-  opacity: 0.6;
+  opacity: 0.5;
   padding-bottom: 0.2rem;
   width: fit-content;
   border-bottom: 1px solid transparent;
@@ -61,7 +70,7 @@
 @media (max-width: 1024px) {
   .content {
     grid-template-columns: 1fr;
-    gap: 6rem;
+    gap: 10rem;
   }
   .portrait {
     width: 80%;
@@ -71,9 +80,6 @@
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 10rem 2rem 5rem;
-  }
   .portrait {
     width: 100%;
   }

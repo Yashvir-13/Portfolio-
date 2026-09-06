@@ -5,20 +5,23 @@ import notes from '@/content/notes.json';
 export default function Notes() {
   return (
     <div className={styles.container}>
+      <div className={styles.topMeta}>
+        <span className="text-mono fade-in">ARCHIVE / NOTES</span>
+        <span className="text-mono fade-in">02:17</span>
+      </div>
+
       <div className={styles.notesList}>
         {notes.map((note, index) => (
           <Link 
             key={note.slug} 
             href={`/notes/${note.slug}`} 
-            className={`${styles.noteItem} fade-in`}
-            style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+            className={styles.noteItem}
           >
-            <div className={styles.meta}>
+            <div className={`${styles.meta} fade-in`} style={{ animationDelay: `${0.2 + index * 0.1}s` }}>
               <span className="text-mono">{note.date}</span>
               <span className="text-mono">{note.title}</span>
             </div>
-            {/* Find the first thought/question from content for the preview */}
-            <p className={styles.question}>
+            <p className={`${styles.question} drift-up`} style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
               {note.content.split('.')[0] + '.'}
             </p>
           </Link>

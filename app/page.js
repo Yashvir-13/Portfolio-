@@ -4,116 +4,111 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className={styles.container}>
-      {/* 01 — OPENING ROOM */}
-      <section className={styles.hero}>
+      {/* SHOT 01 — OPENING ROOM */}
+      <section className={styles.shot01}>
         <h1 className="text-hero fade-in">YASHVIR</h1>
-        <p className={`${styles.subtitle} text-mono fade-in`} style={{ animationDelay: '1s' }}>
-          I make things to understand things.
+      </section>
+
+      {/* SHOT 02 — HUGE PHOTOGRAPH */}
+      <section className={styles.shot02}>
+        <div className={`${styles.shot02Image} reveal-image`} />
+        <span className={`${styles.shot02Meta} text-mono fade-in`} style={{ animationDelay: '1.5s' }}>
+          02:17 AM / UNKNOWN / 2026
+        </span>
+      </section>
+
+      {/* SHOT 03 — STATEMENT */}
+      <section className={styles.shot03}>
+        <p className={`${styles.statement} fade-in`}>
+          I make things to<br/>understand things.
         </p>
       </section>
 
-      {/* 02 — A SMALL INTERRUPTION */}
-      <section className={styles.interruptionBlock}>
-        <p className="interruption fade-in" style={{ animationDelay: '0.2s' }}>
-          some things are made<br/>because they cannot be explained.
-        </p>
-      </section>
-
-      {/* 03 — SELECTED WORK */}
-      <section className={styles.workSequence}>
-        <div className={styles.workMajor}>
-          <Link href="/work/asteria" className={styles.workLink}>
-            <div className={styles.workMeta}>
-              <span className="text-mono">2026</span>
-              <span className="text-mono">Literary / Digital Platform</span>
-            </div>
-            <h2 className="text-title">ASTERIA</h2>
-          </Link>
-        </div>
-        
-        <div className={styles.workMinor}>
-          <Link href="/work/fathom" className={styles.workLink}>
-            <div className={styles.workMeta}>
-              <span className="text-mono">2025</span>
-              <span className="text-mono">Software</span>
-            </div>
-            <h3 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>FATHOM</h3>
-          </Link>
-        </div>
-      </section>
-
-      {/* 04 — CINEMA */}
-      <section className={styles.cinemaSequence}>
-        <Link href="/films/untitled-isolation" className={styles.cinemaLink}>
-          <div className={styles.projectionPlaceholder} />
-          <div className={styles.cinemaOverlay}>
-            <h3 className="text-title">UNTITLED (ISOLATION)</h3>
-            <p className="text-meta">4 mins · 2026</p>
-            <p className={styles.cinemaCaption}>the feeling of being the last person awake.</p>
+      {/* SHOT 04 — SELECTED WORK (ASTERIA) */}
+      <section className={styles.shot04}>
+        <Link href="/work/asteria" className={styles.workLink}>
+          <div className={`${styles.asteriaVisual} reveal-image`} />
+          <h2 className={`${styles.asteriaTitle} text-hero fade-in`}>ASTERIA</h2>
+          <div className={styles.asteriaMeta}>
+            <span className="text-mono">LITERARY PLATFORM</span>
+            <span className="text-mono">2026</span>
           </div>
         </Link>
       </section>
 
-      {/* 05 — WRITING (Poetry Fragment) */}
-      <section className={styles.writingSequence}>
-        <Link href="/writing/again" className={styles.poetryFragment}>
-          <p>
+      {/* SHOT 05 — INTERRUPTION */}
+      <section className={styles.shot05}>
+        <p className="interruption drift-up">
+          Some things are made<br/>because they cannot be explained.
+        </p>
+      </section>
+
+      {/* SHOT 06 — CINEMA */}
+      <section className={styles.shot06}>
+        <Link href="/films/untitled-isolation" className={styles.cinemaLink}>
+          <div className={`${styles.cinemaStill} reveal-image`} />
+          <div className={styles.cinemaOverlay}>
+            <h3 className="text-title">UNTITLED (ISOLATION)</h3>
+            <span className="text-meta">FILM / 04:12 / 2026</span>
+          </div>
+        </Link>
+      </section>
+
+      {/* SHOT 07 — WRITING (Poetry) */}
+      <section className={styles.shot07}>
+        <Link href="/writing/again" className={styles.poetryBlock}>
+          <p className="text-title drift-up">
             I was here before,<br/>
             standing along a shore...
           </p>
-          <span className="text-meta" style={{ marginTop: '2rem', display: 'block', opacity: 0.5 }}>Again (2026)</span>
+          <span className={`${styles.poetryMeta} text-meta`}>POETRY / FRAGMENT / 2026</span>
         </Link>
       </section>
 
-      {/* 06 — PHOTOGRAPHY */}
-      <section className={styles.photoSequence}>
-        <div className={styles.photoLarge}>
-          <div className={styles.photoPlaceholder} />
-          <p className="text-meta">The sky always looks heavier at night.</p>
-        </div>
-        <div className={styles.photoEmptySpace} />
-        <div className={styles.photoSmall}>
-          <div className={styles.photoPlaceholder} />
-          <p className="text-meta">Dust caught in the projector beam.</p>
+      {/* SHOT 08 — PHOTOGRAPHY */}
+      <section className={styles.shot08}>
+        <div className={styles.contactSheet}>
+          <div className={styles.photoLeft}>
+            <div className={`${styles.photoPlaceholder} reveal-image`} />
+            <span className="text-meta">TOKYO / 02:17</span>
+          </div>
+          <div className={styles.photoRight}>
+            <div className={`${styles.photoPlaceholderTall} reveal-image`} style={{ animationDelay: '0.2s' }} />
+            <span className="text-meta">ARCHIVE / UNKNOWN</span>
+          </div>
         </div>
       </section>
 
-      {/* 07 — NOTES */}
-      <section className={styles.notesSequence}>
+      {/* SHOT 09 — NOTES */}
+      <section className={styles.shot09}>
         <Link href="/notes/on-time" className={styles.noteItem}>
-          <span className="text-meta">ON TIME</span>
-          <p className="text-title" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-            What if time isn't moving at all?
-          </p>
+          <span className="text-meta">NOTE / ON TIME</span>
+          <p className="text-title drift-up">What if time isn't moving at all?</p>
         </Link>
-        
         <Link href="/notes/on-color" className={styles.noteItem}>
-          <span className="text-meta">ON COLOR</span>
-          <p className="text-title" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-            The universe probably doesn't look like anything.
-          </p>
-        </Link>
-
-        <Link href="/notes/on-cinema" className={styles.noteItem}>
-          <span className="text-meta">ON CINEMA</span>
-          <p className="text-title" style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}>
-            Why can a three-minute scene stay with you for years?
-          </p>
+          <span className="text-meta">NOTE / ON COLOR</span>
+          <p className="text-title drift-up" style={{ animationDelay: '0.1s' }}>The universe probably doesn't look like anything.</p>
         </Link>
       </section>
 
-      {/* 08 — CURRENTLY */}
-      <section className={styles.currentlySequence}>
-        <div className={styles.currentlyMeta}>CURRENTLY</div>
-        <ul className={styles.currentlyList}>
-          <li>Building — Asteria</li>
-          <li>Writing — ______</li>
-          <li>Making — ______</li>
-          <li>Thinking about — Time</li>
-        </ul>
+      {/* SHOT 10 — NOT YET */}
+      <section className={styles.shot10}>
+        <div className={styles.notYetLabel}>NOT YET</div>
+        <div className={styles.notYetList}>
+          <div className={styles.notYetItem}>
+            <h4 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>37 LINES</h4>
+            <span className="text-meta">POETRY / 2026</span>
+            <p className={styles.notYetDesc}>A poem I began twice and never finished.</p>
+          </div>
+          <div className={styles.notYetItem}>
+            <h4 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>UNTITLED FILM</h4>
+            <span className="text-meta">FILM / CONCEPT / 2026</span>
+            <p className={styles.notYetDesc}>Someone waits for something that may already have happened.</p>
+          </div>
+        </div>
       </section>
 
-      {/* 09 — FOOTER */}
+      {/* FOOTER */}
       <footer className={styles.footer}>
         <p className={styles.footerStatement}>archive currently open.</p>
         <div className={styles.footerNav}>
@@ -122,7 +117,6 @@ export default function Home() {
           <a href="#" className="text-mono">LinkedIn</a>
           <a href="mailto:hello@example.com" className="text-mono">Contact</a>
         </div>
-        <p className="text-meta">© {new Date().getFullYear()} Yashvir</p>
       </footer>
     </div>
   );
