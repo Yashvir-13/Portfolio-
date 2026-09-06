@@ -1,43 +1,47 @@
 .container {
-  padding: 12rem 4rem 4rem;
-  max-width: 800px;
+  padding: 15rem 4rem 10rem;
+  max-width: 1200px;
   margin: 0 auto;
-}
-
-.header {
-  margin-bottom: 8rem;
 }
 
 .notesList {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 12rem;
 }
 
 .noteItem {
-  display: block;
-  padding: 2rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0.6;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .noteItem:hover {
-  border-bottom: 1px solid var(--foreground);
-  padding-left: 1rem;
+  opacity: 1;
+  transform: translateX(1rem);
 }
 
 .meta {
+  display: flex;
+  gap: 2rem;
   color: var(--muted);
-  margin-bottom: 1rem;
 }
 
-.noteItem h2 {
-  font-size: 2rem;
-  margin: 0;
+.question {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--foreground);
+  line-height: 1.3;
+  max-width: 1000px;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 8rem 2rem 2rem;
+    padding: 10rem 2rem 5rem;
+  }
+  .notesList {
+    gap: 8rem;
   }
 }

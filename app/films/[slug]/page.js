@@ -16,30 +16,31 @@ export default async function FilmDetail({ params }) {
 
   return (
     <article className={styles.container}>
-      <div className={styles.cinemaContainer}>
-        {/* Placeholder for video player */}
+      <header className={styles.header}>
+        <h1 className="text-title fade-in">{film.title}</h1>
+      </header>
+
+      <div className={`${styles.cinemaContainer} fade-in`} style={{ animationDelay: '0.5s' }}>
         <div className={styles.videoPlaceholder}>
-          <span className="text-mono" style={{ color: 'var(--muted)' }}>Video Player</span>
+          {/* Subtle placeholder indicating video without UI clutter */}
         </div>
       </div>
 
-      <header className={styles.header}>
-        <h1 className="text-hero fade-in">{film.title}</h1>
-        <div className={`${styles.meta} fade-in`} style={{ animationDelay: '0.2s' }}>
+      <div className={styles.contentContainer}>
+        <div className={styles.metaColumn}>
           <span className="text-mono">{film.year}</span>
           <span className="text-mono">{film.duration}</span>
         </div>
-      </header>
 
-      <div className={styles.content}>
-        <p className={styles.description}>{film.description}</p>
-        
-        {film.director_note && (
-          <div className={styles.directorNote}>
-            <h2 className="text-mono">Director's Note</h2>
-            <p>{film.director_note}</p>
-          </div>
-        )}
+        <div className={styles.textColumn}>
+          <p className={styles.description}>{film.description}</p>
+          
+          {film.director_note && (
+            <div className={styles.directorNote}>
+              <p>{film.director_note}</p>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );

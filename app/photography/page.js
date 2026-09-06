@@ -4,27 +4,30 @@ import photography from '@/content/photography.json';
 export default function Photography() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className="text-title fade-in">Photography</h1>
-      </header>
-
       <div className={styles.gallery}>
-        {photography.map((photo, index) => (
-          <figure 
-            key={photo.id} 
-            className={`${styles.photoItem} fade-in`}
-            style={{ animationDelay: `${0.2 + index * 0.2}s` }}
-          >
-            <div className={styles.imagePlaceholder} />
-            <figcaption className={styles.caption}>
-              <p className={styles.captionText}>{photo.caption}</p>
-              <div className={styles.meta}>
-                <span className="text-mono">{photo.location}</span>
-                <span className="text-mono">{photo.date}</span>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
+        {photography.map((photo, index) => {
+          // Determine layout style based on index to create an irregular grid
+          const isLarge = index % 3 === 0;
+          const isOffset = index % 2 !== 0;
+          
+          return (
+            <figure 
+              key={photo.id} 
+              className={`${styles.photoItem} fade-in ${isLarge ? styles.large : styles.standard} ${isOffset ? styles.offset : ''}`}
+              style={{ animationDelay: `${0.2 + (index % 3) * 0.2}s` }}
+            >
+              <div className={`${styles.imagePlaceholder} cinematic-image`} />
+              
+              <figcaption className={styles.caption}>
+                <div className={styles.meta}>
+                  <span className="text-mono">{photo.location}</span>
+                  <span className="text-mono">{photo.date}</span>
+                </div>
+                <p className={styles.captionText}>{photo.caption}</p>
+              </figcaption>
+            </figure>
+          );
+        })}
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export default async function ProjectDetail({ params }) {
         <div className={styles.meta}>
           <span className="text-mono">{project.year}</span>
           <span className="text-mono">{project.category}</span>
-          <span className="text-mono">{project.status}</span>
+          {project.status && <span className="text-mono">{project.status}</span>}
         </div>
         <h1 className="text-hero fade-in">{project.title}</h1>
         <p className={`${styles.statement} fade-in`} style={{ animationDelay: '0.2s' }}>
@@ -28,26 +28,36 @@ export default async function ProjectDetail({ params }) {
         </p>
       </header>
 
+      <div className={`${styles.heroVisual} fade-in cinematic-image`} style={{ animationDelay: '0.4s' }} />
+
       <div className={styles.content}>
-        <section className={styles.section}>
-          <h2 className="text-mono">Overview</h2>
-          <p>{project.overview}</p>
-        </section>
+        {project.overview && (
+          <section className={styles.chapter}>
+            <h2 className="text-serif italic fade-in">Overview</h2>
+            <p className="fade-in">{project.overview}</p>
+          </section>
+        )}
 
-        <section className={styles.section}>
-          <h2 className="text-mono">Process</h2>
-          <p>{project.process}</p>
-        </section>
+        {project.process && (
+          <section className={styles.chapter}>
+            <h2 className="text-serif italic fade-in">Process</h2>
+            <p className="fade-in">{project.process}</p>
+          </section>
+        )}
 
-        <section className={styles.section}>
-          <h2 className="text-mono">Technical</h2>
-          <p>{project.technical}</p>
-        </section>
+        {project.technical && (
+          <section className={styles.chapter}>
+            <h2 className="text-serif italic fade-in">Technical</h2>
+            <p className="fade-in">{project.technical}</p>
+          </section>
+        )}
 
-        <section className={styles.section}>
-          <h2 className="text-mono">Lessons</h2>
-          <p>{project.lessons}</p>
-        </section>
+        {project.lessons && (
+          <section className={styles.chapter}>
+            <h2 className="text-serif italic fade-in">Lessons</h2>
+            <p className="fade-in">{project.lessons}</p>
+          </section>
+        )}
       </div>
     </article>
   );
