@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "asteria",
+    "title": "Asteria",
+    "year": "2026",
+    "category": "Literary / Digital Platform",
+    "statement": "A platform for fragmented literature.",
+    "overview": "Asteria was built to explore how text behaves when it is no longer bound to a linear page. It treats reading as navigation through a conceptual space rather than a sequence of lines.",
+    "process": "The design began with the assumption that...",
+    "technical": "Built using Next.js and custom procedural text rendering algorithms.",
+    "lessons": "I learned that providing too much freedom in reading order often leads to paralysis rather than exploration.",
+    "status": "In Development",
+    "links": []
+  },
+  {
+    "slug": "fathom",
+    "title": "Fathom",
+    "year": "2025",
+    "category": "Software",
+    "statement": "An experiment in mapping thought.",
+    "overview": "Fathom attempts to visually represent the connections between disparate ideas. It's essentially a local graph database but with an interface designed for human memory rather than data retrieval.",
+    "process": "I wanted a tool that behaved like a brain on a very slow day.",
+    "technical": "React, D3.js.",
+    "lessons": "Visualizing everything simultaneously is almost as bad as seeing nothing at all.",
+    "status": "Archived",
+    "links": []
+  },
+  {
+    "slug": "frame-interpolation",
+    "title": "Frame Interpolation",
+    "year": "2025",
+    "category": "Technical Experiment",
+    "statement": "What happens in the space between frames?",
+    "overview": "An attempt to train a model to guess the missing frames of heavily damaged 16mm film.",
+    "process": "I gathered public domain footage and deliberately removed 80% of the frames.",
+    "technical": "Python, PyTorch, optical flow algorithms.",
+    "lessons": "The machine doesn't understand motion, it only understands pixels. Its 'hallucinations' of movement are often more interesting than the original footage.",
+    "status": "Completed Experiment",
+    "links": []
+  }
+]

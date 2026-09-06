@@ -1,0 +1,76 @@
+.container {
+  padding: 8rem 0 4rem;
+  width: 100%;
+}
+
+.cinemaContainer {
+  width: 100vw;
+  height: 80vh;
+  background-color: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.videoPlaceholder {
+  width: 100%;
+  max-width: 1400px;
+  aspect-ratio: 16/9;
+  background-color: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  color: var(--muted);
+  margin-top: 2rem;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.5rem;
+  color: var(--foreground);
+}
+
+.directorNote h2 {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.directorNote p {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .cinemaContainer {
+    height: 40vh;
+  }
+  .header {
+    padding: 0 2rem;
+  }
+  .content {
+    padding: 0 2rem;
+  }
+}

@@ -1,0 +1,52 @@
+.container {
+  padding: 12rem 4rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 8rem;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectItem {
+  display: block;
+  padding: 4rem 0;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.4s ease;
+}
+
+.projectItem:hover {
+  opacity: 1;
+}
+
+.projectMeta {
+  display: flex;
+  gap: 2rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.projectItem h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+
+.statement {
+  font-size: 1.25rem;
+  color: var(--foreground);
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 8rem 2rem 2rem;
+  }
+  .projectItem {
+    padding: 3rem 0;
+  }
+}
