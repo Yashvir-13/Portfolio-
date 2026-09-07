@@ -1,11 +1,6 @@
 import styles from './project.module.css';
-import { getContentBySlug, getPublishedContent } from '@/lib/content.js';
+import { getContentBySlug } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
-
-export async function generateStaticParams() {
-  const projects = await getPublishedContent('project');
-  return projects.map((p) => ({ slug: p.slug }));
-}
 
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;

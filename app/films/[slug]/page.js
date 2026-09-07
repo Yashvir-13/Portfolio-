@@ -1,11 +1,6 @@
 import styles from './film.module.css';
-import { getContentBySlug, getPublishedContent } from '@/lib/content.js';
+import { getContentBySlug } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
-
-export async function generateStaticParams() {
-  const films = await getPublishedContent('film');
-  return films.map((f) => ({ slug: f.slug }));
-}
 
 export default async function FilmDetail({ params }) {
   const { slug } = await params;

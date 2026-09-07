@@ -6,8 +6,8 @@
   --surface: #141311;
   --border: #22211e;
 
-  --font-serif: "Playfair Display", serif;
-  --font-mono: "Space Mono", monospace;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-mono: "Courier New", Courier, monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 

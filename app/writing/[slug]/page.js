@@ -1,11 +1,6 @@
 import styles from './piece.module.css';
-import { getContentBySlug, getPublishedContentMultiType } from '@/lib/content.js';
+import { getContentBySlug } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
-
-export async function generateStaticParams() {
-  const writing = await getPublishedContentMultiType(['poem', 'fragment', 'essay']);
-  return writing.map((w) => ({ slug: w.slug }));
-}
 
 export default async function WritingPiece({ params }) {
   const { slug } = await params;

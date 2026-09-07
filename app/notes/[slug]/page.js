@@ -1,11 +1,6 @@
 import styles from './note.module.css';
-import { getContentBySlug, getPublishedContent } from '@/lib/content.js';
+import { getContentBySlug } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
-
-export async function generateStaticParams() {
-  const notes = await getPublishedContent('note');
-  return notes.map((n) => ({ slug: n.slug }));
-}
 
 export default async function NoteDetail({ params }) {
   const { slug } = await params;

@@ -1,20 +1,10 @@
-import { Playfair_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import Navigation from "@/components/Navigation";
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
+// Archive pages are backed by Neon and must query live content at request time.
+// This keeps deployment builds independent of database network access.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Yashvir — I make things to understand things",
@@ -23,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${spaceMono.variable}`}>
+    <html lang="en">
       <body>
         <NoiseOverlay />
         <Navigation />
