@@ -20,6 +20,7 @@
   align-items: center;
   margin-bottom: 10vh;
   background-color: #020202;
+  padding-bottom: 2rem; /* Add breathing room */
 }
 
 .videoPlaceholder {

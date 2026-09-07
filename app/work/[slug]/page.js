@@ -24,7 +24,11 @@ export default async function ProjectDetail({ params }) {
         </p>
       </header>
 
-      <div className={`${styles.heroVisual} reveal-image cinematic-image`} />
+      {project.hero_image ? (
+        <img src={project.hero_image} className={`${styles.heroVisual} reveal-image cinematic-image`} alt={project.title} />
+      ) : (
+        <div className={`${styles.heroVisual} reveal-image cinematic-image`} />
+      )}
 
       <div className={styles.content}>
         {project.body && (

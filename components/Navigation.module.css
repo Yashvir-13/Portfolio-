@@ -8,6 +8,23 @@
   mix-blend-mode: difference;
 }
 
+.mobileToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.mobileToggle:hover {
+  opacity: 1;
+}
+
 .navList {
   display: flex;
   gap: 3rem;
@@ -38,10 +55,18 @@
   .nav {
     padding: 2rem;
   }
+  .mobileToggle {
+    display: block;
+    margin-bottom: 2rem;
+  }
   .navList {
-    gap: 1.5rem;
-    font-size: 0.55rem;
-    flex-wrap: wrap;
-    opacity: 0.5; /* Keep visible on mobile */
+    display: none;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+  .navList.open {
+    display: flex;
   }
 }

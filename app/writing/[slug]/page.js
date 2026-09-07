@@ -14,10 +14,11 @@ export default async function WritingPiece({ params }) {
 
   // Fix Substack subscription forms to actually post to Substack
   if (piece.source === 'substack') {
-    // The feed_url is something like https://notesfromsomewhere3.substack.com/feed
-    // We can extract the base url
-    const subscribeUrl = 'https://notesfromsomewhere3.substack.com/subscribe';
-    finalBody = finalBody.replace(/action="[^"]*"/, `action="${subscribeUrl}"`);
+    // Strip out the ugly subscription widget entirely and replace it with a clean link
+    const cleanLink = piece.canonical_url ? `<a href="${piece.canonical_url}" target="_blank" rel="noopener noreferrer">Read on Substack →</a>` : '';
+    finalBody = finalBody.replace(/<div class="subscription-widget-wrap(?:-editor)?[^>]*>[\s\S]*?<\/div>\s*<\/div>/g, cleanLink);
+    // As a fallback, strip the form itself if the wrapper isn't matched
+    finalBody = finalBody.replace(/<form class="subscription-widget[^>]*>[\s\S]*?<\/form>/g, cleanLink);
   }
 
   const contentClass = piece.type === 'poem' ? styles.poem : styles.essay;

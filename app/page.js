@@ -14,7 +14,7 @@ export default async function Home() {
     getPublishedContent('project', { limit: 1 }),
     getPublishedContent('film', { limit: 1 }),
     getPublishedContentMultiType(['poem', 'fragment'], { limit: 1 }),
-    getPublishedContent('photograph', { limit: 2 }),
+    getPublishedContent('photograph', { limit: 3 }),
     getPublishedContent('note', { limit: 2 }),
     getPublishedContent('unfinished', { limit: 2 })
   ]);
@@ -35,7 +35,11 @@ export default async function Home() {
 
       {/* SHOT 02 — HUGE PHOTOGRAPH */}
       <section className={styles.shot02}>
-        <div className={`${styles.shot02Image} reveal-image`} />
+        {latestPhotos[0]?.hero_image ? (
+          <img src={latestPhotos[0].hero_image} className={`${styles.shot02Image} reveal-image cinematic-image`} alt="Archive" />
+        ) : (
+          <div className={`${styles.shot02Image} reveal-image`} />
+        )}
         <span className={`${styles.shot02Meta} text-mono fade-in`} style={{ animationDelay: '1.5s' }}>
           02:17 AM / UNKNOWN / 2026
         </span>
@@ -52,7 +56,11 @@ export default async function Home() {
       {latestProject && (
         <section className={styles.shot04}>
           <Link href={`/work/${latestProject.slug}`} className={styles.workLink}>
-            <div className={`${styles.asteriaVisual} reveal-image`} />
+            {latestProject.hero_image ? (
+              <img src={latestProject.hero_image} className={`${styles.asteriaVisual} reveal-image cinematic-image`} alt={latestProject.title} />
+            ) : (
+              <div className={`${styles.asteriaVisual} reveal-image`} />
+            )}
             <h2 className={`${styles.asteriaTitle} text-hero fade-in`}>{latestProject.title.toUpperCase()}</h2>
             <div className={styles.asteriaMeta}>
               <span className="text-mono">{latestProject.metadata?.category?.toUpperCase() || 'PROJECT'}</span>
@@ -73,7 +81,11 @@ export default async function Home() {
       {latestFilm && (
         <section className={styles.shot06}>
           <Link href={`/films/${latestFilm.slug}`} className={styles.cinemaLink}>
-            <div className={`${styles.cinemaStill} reveal-image`} />
+            {latestFilm.hero_image ? (
+              <img src={latestFilm.hero_image} className={`${styles.cinemaStill} reveal-image cinematic-image`} alt={latestFilm.title} />
+            ) : (
+              <div className={`${styles.cinemaStill} reveal-image`} />
+            )}
             <div className={styles.cinemaOverlay}>
               <h3 className="text-title">{latestFilm.title.toUpperCase()}</h3>
               <span className="text-meta">FILM / {latestFilm.metadata?.duration || 'UNKNOWN'} / {latestFilm.date ? latestFilm.date.getFullYear() : '2026'}</span>
@@ -95,17 +107,25 @@ export default async function Home() {
       )}
 
       {/* SHOT 08 — PHOTOGRAPHY */}
-      {latestPhotos.length > 0 && (
+      {latestPhotos.length > 1 && (
         <section className={styles.shot08}>
           <div className={styles.contactSheet}>
             <div className={styles.photoLeft}>
-              <div className={`${styles.photoPlaceholder} reveal-image`} />
-              <span className="text-meta">{latestPhotos[0].metadata?.location?.toUpperCase() || 'ARCHIVE'} / 02:17</span>
+              {latestPhotos[1]?.hero_image ? (
+                <img src={latestPhotos[1].hero_image} className={`${styles.photoPlaceholder} reveal-image cinematic-image`} alt="Archive" />
+              ) : (
+                <div className={`${styles.photoPlaceholder} reveal-image`} />
+              )}
+              <span className="text-meta">{latestPhotos[1].metadata?.location?.toUpperCase() || 'ARCHIVE'} / 02:17</span>
             </div>
-            {latestPhotos[1] && (
+            {latestPhotos[2] && (
               <div className={styles.photoRight}>
-                <div className={`${styles.photoPlaceholderTall} reveal-image`} style={{ animationDelay: '0.2s' }} />
-                <span className="text-meta">{latestPhotos[1].metadata?.location?.toUpperCase() || 'ARCHIVE'} / UNKNOWN</span>
+                {latestPhotos[2].hero_image ? (
+                  <img src={latestPhotos[2].hero_image} className={`${styles.photoPlaceholderTall} reveal-image cinematic-image`} style={{ animationDelay: '0.2s' }} alt="Archive" />
+                ) : (
+                  <div className={`${styles.photoPlaceholderTall} reveal-image`} style={{ animationDelay: '0.2s' }} />
+                )}
+                <span className="text-meta">{latestPhotos[2].metadata?.location?.toUpperCase() || 'ARCHIVE'} / UNKNOWN</span>
               </div>
             )}
           </div>
@@ -146,9 +166,8 @@ export default async function Home() {
       <footer className={styles.footer}>
         <p className={styles.footerStatement}>archive currently open.</p>
         <div className={styles.footerNav}>
-          <a href="#" className="text-mono">CV</a>
-          <a href="#" className="text-mono">GitHub</a>
-          <a href="#" className="text-mono">LinkedIn</a>
+          <a href="https://github.com/Yashvir-13" target="_blank" rel="noopener noreferrer" className="text-mono">GitHub</a>
+          <a href="https://linkedin.com/in/yashvir" target="_blank" rel="noopener noreferrer" className="text-mono">LinkedIn</a>
           <a href="mailto:hello@example.com" className="text-mono">Contact</a>
         </div>
       </footer>

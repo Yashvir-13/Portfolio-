@@ -34,6 +34,15 @@
   color: var(--foreground);
   width: 90vw;
   text-align: left;
+  overflow-wrap: break-word; /* Prevent long Substack URLs from breaking layout */
+}
+
+/* Hide Substack editor artifacts */
+.content .hide-text,
+.content .image-link-expand,
+.content .subscription-widget-wrap-editor,
+.content .subscription-widget-wrap {
+  display: none !important;
 }
 
 .content.poem {

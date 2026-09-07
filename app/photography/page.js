@@ -20,7 +20,11 @@ export default async function Photography() {
               key={photo.id} 
               className={`${styles.photoItem} ${isMassive ? styles.massive : styles.standard} ${isRight ? styles.right : ''}`}
             >
-              <div className={`${styles.imagePlaceholder} reveal-image cinematic-image`} style={{ animationDelay: `${0.2 + (index % 3) * 0.2}s` }} />
+              {photo.hero_image ? (
+                <img src={photo.hero_image} className={`${styles.imagePlaceholder} reveal-image cinematic-image`} style={{ animationDelay: `${0.2 + (index % 3) * 0.2}s` }} alt="Photography" />
+              ) : (
+                <div className={`${styles.imagePlaceholder} reveal-image cinematic-image`} style={{ animationDelay: `${0.2 + (index % 3) * 0.2}s` }} />
+              )}
               
               <figcaption className={`${styles.caption} fade-in`} style={{ animationDelay: `${0.8 + (index % 3) * 0.2}s` }}>
                 <span className="text-meta">{photo.metadata?.location || 'Unknown'} / {photo.date ? photo.date.getFullYear() : 'Unknown'}</span>

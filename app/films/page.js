@@ -18,7 +18,11 @@ export default async function Films() {
             className={`${styles.filmItem} fade-in`}
             style={{ animationDelay: `${0.2 + index * 0.1}s` }}
           >
-            <div className={styles.posterPlaceholder} />
+            {film.hero_image ? (
+              <img src={film.hero_image} className={`${styles.posterPlaceholder} cinematic-image`} alt={film.title} />
+            ) : (
+              <div className={styles.posterPlaceholder} />
+            )}
             <div className={styles.filmInfo}>
               <h2>{film.title}</h2>
               <div className={styles.meta}>
