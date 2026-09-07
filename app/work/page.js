@@ -1,8 +1,9 @@
 import styles from './page.module.css';
 import Link from 'next/link';
-import projects from '@/content/projects.json';
+import { getPublishedContent } from '@/lib/content.js';
 
-export default function Work() {
+export default async function Work() {
+  const projects = await getPublishedContent('project');
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -21,11 +22,11 @@ export default function Work() {
             style={{ animationDelay: `${0.3 + index * 0.1}s` }}
           >
             <div className={styles.projectMeta}>
-              <span className="text-mono">{project.year}</span>
-              <span className="text-mono">{project.category}</span>
+              <span className="text-mono">{project.date ? project.date.getFullYear() : 'Unknown'}</span>
+              <span className="text-mono">{project.metadata?.category || ''}</span>
             </div>
             <h2>{project.title}</h2>
-            <p className={styles.statement}>{project.statement}</p>
+            <p className={styles.statement}>{project.excerpt}</p>
           </Link>
         ))}
       </div>

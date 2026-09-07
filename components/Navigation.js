@@ -1,7 +1,15 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith('/control')) {
+    return null;
+  }
   const links = [
     { href: '/', label: 'Home' },
     { href: '/work', label: 'Work' },

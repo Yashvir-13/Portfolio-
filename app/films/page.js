@@ -1,8 +1,9 @@
 import styles from './films.module.css';
 import Link from 'next/link';
-import films from '@/content/films.json';
+import { getPublishedContent } from '@/lib/content.js';
 
-export default function Films() {
+export default async function Films() {
+  const films = await getPublishedContent('film');
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -21,8 +22,8 @@ export default function Films() {
             <div className={styles.filmInfo}>
               <h2>{film.title}</h2>
               <div className={styles.meta}>
-                <span className="text-mono">{film.year}</span>
-                <span className="text-mono">{film.duration}</span>
+                <span className="text-mono">{film.date ? film.date.getFullYear() : 'Unknown'}</span>
+                <span className="text-mono">{film.metadata?.duration || ''}</span>
               </div>
             </div>
           </Link>

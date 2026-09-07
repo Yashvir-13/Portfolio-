@@ -1,35 +1,52 @@
 import styles from './piece.module.css';
-import writing from '@/content/writing.json';
+import { getContentBySlug, getPublishedContentMultiType } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const writing = await getPublishedContentMultiType(['poem', 'fragment', 'essay']);
   return writing.map((w) => ({ slug: w.slug }));
 }
 
 export default async function WritingPiece({ params }) {
   const { slug } = await params;
-  const piece = writing.find((w) => w.slug === slug);
+  const piece = await getContentBySlug(slug);
 
   if (!piece) {
     notFound();
   }
 
+  let finalBody = piece.body || '';
+
+  // Fix Substack subscription forms to actually post to Substack
+  if (piece.source === 'substack') {
+    // The feed_url is something like https://notesfromsomewhere3.substack.com/feed
+    // We can extract the base url
+    const subscribeUrl = 'https://notesfromsomewhere3.substack.com/subscribe';
+    finalBody = finalBody.replace(/action="[^"]*"/, `action="${subscribeUrl}"`);
+  }
+
+  const contentClass = piece.type === 'poem' ? styles.poem : styles.essay;
+
   return (
     <article className={styles.container}>
       <div className={`${styles.ambientMeta} text-mono fade-in`} style={{ animationDelay: '3s' }}>
-        ARCHIVE / {piece.year} / {piece.type}
+        ARCHIVE / {piece.date ? piece.date.getFullYear() : 'Unknown'} / {piece.type}
       </div>
 
       <header className={styles.header}>
         <h1 className={`${styles.title} fade-in`}>{piece.title}</h1>
       </header>
 
-      <div className={`${styles.content} fade-in`} style={{ animationDelay: '1s' }}>
-        {piece.content.split('\n').map((line, i) => (
-          <p key={i} className={line.trim() === '' ? styles.emptyLine : ''}>
-            {line}
-          </p>
-        ))}
+      <div className={`${styles.content} ${contentClass} fade-in`} style={{ animationDelay: '1s' }}>
+        {piece.source === 'native' ? (
+          finalBody.split('\n').map((line, i) => (
+            <p key={i} className={line.trim() === '' ? styles.emptyLine : ''}>
+              {line}
+            </p>
+          ))
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: finalBody }} />
+        )}
       </div>
     </article>
   );

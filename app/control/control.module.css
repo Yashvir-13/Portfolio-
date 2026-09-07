@@ -1,0 +1,120 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.nav {
+  width: 250px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg) var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.navBrand {
+  margin-bottom: var(--spacing-xl);
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.navList a {
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.navList a:hover {
+  color: var(--foreground);
+}
+
+.navBottom {
+  margin-top: auto;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.logoutBtn:hover {
+  color: var(--foreground);
+}
+
+.main {
+  flex-grow: 1;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+/* Dashboard specific styles */
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.statCard {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statCard .label {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.statCard .value {
+  font-size: 2rem;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.navBrandTitle {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.actionButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--foreground);
+  color: var(--background);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: none;
+}

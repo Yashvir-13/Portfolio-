@@ -1,7 +1,8 @@
 import styles from './photography.module.css';
-import photography from '@/content/photography.json';
+import { getPublishedContent } from '@/lib/content.js';
 
-export default function Photography() {
+export default async function Photography() {
+  const photography = await getPublishedContent('photograph');
   return (
     <div className={styles.container}>
       <div className={styles.topMeta}>
@@ -22,8 +23,8 @@ export default function Photography() {
               <div className={`${styles.imagePlaceholder} reveal-image cinematic-image`} style={{ animationDelay: `${0.2 + (index % 3) * 0.2}s` }} />
               
               <figcaption className={`${styles.caption} fade-in`} style={{ animationDelay: `${0.8 + (index % 3) * 0.2}s` }}>
-                <span className="text-meta">{photo.location} / {photo.date}</span>
-                <p className={styles.captionText}>{photo.caption}</p>
+                <span className="text-meta">{photo.metadata?.location || 'Unknown'} / {photo.date ? photo.date.getFullYear() : 'Unknown'}</span>
+                <p className={styles.captionText}>{photo.excerpt}</p>
               </figcaption>
             </figure>
           );

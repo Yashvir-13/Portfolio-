@@ -1,12 +1,17 @@
 import styles from './notYet.module.css';
-import notYet from '@/content/not-yet.json';
+import { getPublishedContent } from '@/lib/content.js';
 
-export default function NotYet() {
+export default async function NotYet() {
+  const notYet = await getPublishedContent('unfinished');
+
+  const now = new Date();
+  const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
   return (
     <div className={styles.container}>
       <div className={styles.topMeta}>
         <span className="text-mono fade-in">ARCHIVE / NOT YET</span>
-        <span className="text-mono fade-in">02:17</span>
+        <span className="text-mono fade-in">{timeString}</span>
       </div>
 
       <header className={styles.header}>
@@ -16,17 +21,17 @@ export default function NotYet() {
       <ul className={styles.list}>
         {notYet.map((item, index) => (
           <li 
-            key={item.id} 
+            key={item.slug} 
             className={styles.item}
           >
             <h2 className={`${styles.title} fade-in`} style={{ animationDelay: `${0.2 + index * 0.1}s` }}>
               {item.title}
             </h2>
             <div className={`${styles.meta} fade-in`} style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
-              <span className="text-mono">{item.type} / {item.year}</span>
+              <span className="text-mono">{item.metadata?.unfinished_type || 'Unknown'} / {item.date ? item.date.getFullYear() : 'Unknown'}</span>
             </div>
             <p className={`${styles.description} drift-up`} style={{ animationDelay: `${0.6 + index * 0.1}s` }}>
-              {item.description}
+              {item.excerpt}
             </p>
           </li>
         ))}

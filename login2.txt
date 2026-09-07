@@ -1,0 +1,6 @@
+INFO: Awaiting authentication in web browser.
+INFO: Auth Url: https://oauth2.neon.tech/oauth2/auth?scope=openid+offline+offline_access+urn%3Aneoncloud%3Aprojects%3Acreate+urn%3Aneoncloud%3Aprojects%3Aread+urn%3Aneoncloud%3Aprojects%3Aupdate+urn%3Aneoncloud%3Aprojects%3Adelete+urn%3Aneoncloud%3Aorgs%3Acreate+urn%3Aneoncloud%3Aorgs%3Aread+urn%3Aneoncloud%3Aorgs%3Aupdate+urn%3Aneoncloud%3Aorgs%3Adelete+urn%3Aneoncloud%3Aorgs%3Apermission&state=RZbkRLsGddnN3jjnVExeSOnMAAyPKqws5pNXF76NaZk&code_challenge=Tm4t8KkYKxc6F4B92S-z3Iyl2dpex_2qwmHTZc9QqQY&code_challenge_method=S256&redirect_uri=http%3A%2F%2F127.0.0.1%3A39175%2Fcallback&client_id=neonctl&response_type=code
+INFO: Auth complete
+INFO: Awaiting authentication in web browser.
+INFO: Auth Url: https://oauth2.neon.tech/oauth2/auth?scope=openid+offline+offline_access+urn%3Aneoncloud%3Aprojects%3Acreate+urn%3Aneoncloud%3Aprojects%3Aread+urn%3Aneoncloud%3Aprojects%3Aupdate+urn%3Aneoncloud%3Aprojects%3Adelete+urn%3Aneoncloud%3Aorgs%3Acreate+urn%3Aneoncloud%3Aorgs%3Aread+urn%3Aneoncloud%3Aorgs%3Aupdate+urn%3Aneoncloud%3Aorgs%3Adelete+urn%3Aneoncloud%3Aorgs%3Apermission&state=crSvqQDxqYz4bqjCr3gr787d7DQ0wQeM77MyZV2HayY&code_challenge=TIQ2i5r_NHI61FjKZP_X2HR_E8ZOTncYkGpPLRb54X8&code_challenge_method=S256&redirect_uri=http%3A%2F%2F127.0.0.1%3A39407%2Fcallback&client_id=neonctl&response_type=code
+INFO: Auth complete

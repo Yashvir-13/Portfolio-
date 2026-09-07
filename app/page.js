@@ -1,7 +1,31 @@
 import styles from './page.module.css';
 import Link from 'next/link';
+import { getPublishedContent, getPublishedContentMultiType } from '@/lib/content.js';
 
-export default function Home() {
+export default async function Home() {
+  const [
+    projects,
+    films,
+    poetry,
+    photos,
+    notes,
+    notYet
+  ] = await Promise.all([
+    getPublishedContent('project', { limit: 1 }),
+    getPublishedContent('film', { limit: 1 }),
+    getPublishedContentMultiType(['poem', 'fragment'], { limit: 1 }),
+    getPublishedContent('photograph', { limit: 2 }),
+    getPublishedContent('note', { limit: 2 }),
+    getPublishedContent('unfinished', { limit: 2 })
+  ]);
+
+  const latestProject = projects[0];
+  const latestFilm = films[0];
+  const latestPoem = poetry[0];
+  const latestPhotos = photos;
+  const latestNotes = notes;
+  const latestNotYet = notYet;
+
   return (
     <div className={styles.container}>
       {/* SHOT 01 — OPENING ROOM */}
@@ -24,17 +48,19 @@ export default function Home() {
         </p>
       </section>
 
-      {/* SHOT 04 — SELECTED WORK (ASTERIA) */}
-      <section className={styles.shot04}>
-        <Link href="/work/asteria" className={styles.workLink}>
-          <div className={`${styles.asteriaVisual} reveal-image`} />
-          <h2 className={`${styles.asteriaTitle} text-hero fade-in`}>ASTERIA</h2>
-          <div className={styles.asteriaMeta}>
-            <span className="text-mono">LITERARY PLATFORM</span>
-            <span className="text-mono">2026</span>
-          </div>
-        </Link>
-      </section>
+      {/* SHOT 04 — SELECTED WORK */}
+      {latestProject && (
+        <section className={styles.shot04}>
+          <Link href={`/work/${latestProject.slug}`} className={styles.workLink}>
+            <div className={`${styles.asteriaVisual} reveal-image`} />
+            <h2 className={`${styles.asteriaTitle} text-hero fade-in`}>{latestProject.title.toUpperCase()}</h2>
+            <div className={styles.asteriaMeta}>
+              <span className="text-mono">{latestProject.metadata?.category?.toUpperCase() || 'PROJECT'}</span>
+              <span className="text-mono">{latestProject.date ? latestProject.date.getFullYear() : '2026'}</span>
+            </div>
+          </Link>
+        </section>
+      )}
 
       {/* SHOT 05 — INTERRUPTION */}
       <section className={styles.shot05}>
@@ -44,69 +70,77 @@ export default function Home() {
       </section>
 
       {/* SHOT 06 — CINEMA */}
-      <section className={styles.shot06}>
-        <Link href="/films/untitled-isolation" className={styles.cinemaLink}>
-          <div className={`${styles.cinemaStill} reveal-image`} />
-          <div className={styles.cinemaOverlay}>
-            <h3 className="text-title">UNTITLED (ISOLATION)</h3>
-            <span className="text-meta">FILM / 04:12 / 2026</span>
-          </div>
-        </Link>
-      </section>
+      {latestFilm && (
+        <section className={styles.shot06}>
+          <Link href={`/films/${latestFilm.slug}`} className={styles.cinemaLink}>
+            <div className={`${styles.cinemaStill} reveal-image`} />
+            <div className={styles.cinemaOverlay}>
+              <h3 className="text-title">{latestFilm.title.toUpperCase()}</h3>
+              <span className="text-meta">FILM / {latestFilm.metadata?.duration || 'UNKNOWN'} / {latestFilm.date ? latestFilm.date.getFullYear() : '2026'}</span>
+            </div>
+          </Link>
+        </section>
+      )}
 
-      {/* SHOT 07 — WRITING (Poetry) */}
-      <section className={styles.shot07}>
-        <Link href="/writing/again" className={styles.poetryBlock}>
-          <p className="text-title drift-up">
-            I was here before,<br/>
-            standing along a shore...
-          </p>
-          <span className={`${styles.poetryMeta} text-meta`}>POETRY / FRAGMENT / 2026</span>
-        </Link>
-      </section>
+      {/* SHOT 07 — WRITING */}
+      {latestPoem && (
+        <section className={styles.shot07}>
+          <Link href={`/writing/${latestPoem.slug}`} className={styles.poetryBlock}>
+            <p className="text-title drift-up">
+              {latestPoem.body ? latestPoem.body.substring(0, 80) + '...' : latestPoem.title}
+            </p>
+            <span className={`${styles.poetryMeta} text-meta`}>WRITING / {latestPoem.type.toUpperCase()} / {latestPoem.date ? latestPoem.date.getFullYear() : '2026'}</span>
+          </Link>
+        </section>
+      )}
 
       {/* SHOT 08 — PHOTOGRAPHY */}
-      <section className={styles.shot08}>
-        <div className={styles.contactSheet}>
-          <div className={styles.photoLeft}>
-            <div className={`${styles.photoPlaceholder} reveal-image`} />
-            <span className="text-meta">TOKYO / 02:17</span>
+      {latestPhotos.length > 0 && (
+        <section className={styles.shot08}>
+          <div className={styles.contactSheet}>
+            <div className={styles.photoLeft}>
+              <div className={`${styles.photoPlaceholder} reveal-image`} />
+              <span className="text-meta">{latestPhotos[0].metadata?.location?.toUpperCase() || 'ARCHIVE'} / 02:17</span>
+            </div>
+            {latestPhotos[1] && (
+              <div className={styles.photoRight}>
+                <div className={`${styles.photoPlaceholderTall} reveal-image`} style={{ animationDelay: '0.2s' }} />
+                <span className="text-meta">{latestPhotos[1].metadata?.location?.toUpperCase() || 'ARCHIVE'} / UNKNOWN</span>
+              </div>
+            )}
           </div>
-          <div className={styles.photoRight}>
-            <div className={`${styles.photoPlaceholderTall} reveal-image`} style={{ animationDelay: '0.2s' }} />
-            <span className="text-meta">ARCHIVE / UNKNOWN</span>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* SHOT 09 — NOTES */}
-      <section className={styles.shot09}>
-        <Link href="/notes/on-time" className={styles.noteItem}>
-          <span className="text-meta">NOTE / ON TIME</span>
-          <p className="text-title drift-up">What if time isn't moving at all?</p>
-        </Link>
-        <Link href="/notes/on-color" className={styles.noteItem}>
-          <span className="text-meta">NOTE / ON COLOR</span>
-          <p className="text-title drift-up" style={{ animationDelay: '0.1s' }}>The universe probably doesn't look like anything.</p>
-        </Link>
-      </section>
+      {latestNotes.length > 0 && (
+        <section className={styles.shot09}>
+          {latestNotes.map((note, idx) => (
+            <Link key={note.slug} href={`/notes/${note.slug}`} className={styles.noteItem}>
+              <span className="text-meta">NOTE / {note.title.toUpperCase()}</span>
+              <p className="text-title drift-up" style={{ animationDelay: `${idx * 0.1}s` }}>
+                {note.body || ''}
+              </p>
+            </Link>
+          ))}
+        </section>
+      )}
 
       {/* SHOT 10 — NOT YET */}
-      <section className={styles.shot10}>
-        <div className={styles.notYetLabel}>NOT YET</div>
-        <div className={styles.notYetList}>
-          <div className={styles.notYetItem}>
-            <h4 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>37 LINES</h4>
-            <span className="text-meta">POETRY / 2026</span>
-            <p className={styles.notYetDesc}>A poem I began twice and never finished.</p>
+      {latestNotYet.length > 0 && (
+        <section className={styles.shot10}>
+          <div className={styles.notYetLabel}>NOT YET</div>
+          <div className={styles.notYetList}>
+            {latestNotYet.map(item => (
+              <div key={item.slug} className={styles.notYetItem}>
+                <h4 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>{item.title.toUpperCase()}</h4>
+                <span className="text-meta">{item.metadata?.unfinished_type?.toUpperCase() || 'CONCEPT'} / {item.date ? item.date.getFullYear() : '2026'}</span>
+                <p className={styles.notYetDesc}>{item.excerpt}</p>
+              </div>
+            ))}
           </div>
-          <div className={styles.notYetItem}>
-            <h4 className="text-title" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>UNTITLED FILM</h4>
-            <span className="text-meta">FILM / CONCEPT / 2026</span>
-            <p className={styles.notYetDesc}>Someone waits for something that may already have happened.</p>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FOOTER */}
       <footer className={styles.footer}>

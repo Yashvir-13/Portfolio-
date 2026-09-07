@@ -1,14 +1,15 @@
 import styles from './project.module.css';
-import projects from '@/content/projects.json';
+import { getContentBySlug, getPublishedContent } from '@/lib/content.js';
 import { notFound } from 'next/navigation';
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getPublishedContent('project');
   return projects.map((p) => ({ slug: p.slug }));
 }
 
 export default async function ProjectDetail({ params }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getContentBySlug(slug, 'project');
 
   if (!project) {
     notFound();
@@ -17,45 +18,45 @@ export default async function ProjectDetail({ params }) {
   return (
     <article className={styles.container}>
       <div className={styles.topMeta}>
-        <span className="text-mono">ARCHIVE / {project.year} / {project.category}</span>
+        <span className="text-mono">ARCHIVE / {project.date ? project.date.getFullYear() : 'Unknown'} / {project.metadata?.category || 'Unknown'}</span>
         <span className="text-mono">02:17</span>
       </div>
 
       <header className={styles.header}>
         <h1 className={`${styles.title} fade-in`}>{project.title}</h1>
         <p className={`${styles.statement} fade-in`} style={{ animationDelay: '0.2s' }}>
-          {project.statement}
+          {project.excerpt}
         </p>
       </header>
 
       <div className={`${styles.heroVisual} reveal-image cinematic-image`} />
 
       <div className={styles.content}>
-        {project.overview && (
+        {project.body && (
           <section className={styles.chapter}>
             <h2 className="text-serif italic fade-in">Overview</h2>
-            <p className="drift-up">{project.overview}</p>
+            <p className="drift-up">{project.body}</p>
           </section>
         )}
 
-        {project.process && (
+        {project.metadata?.process && (
           <section className={styles.chapter}>
             <h2 className="text-serif italic fade-in">Process</h2>
-            <p className="drift-up">{project.process}</p>
+            <p className="drift-up">{project.metadata.process}</p>
           </section>
         )}
 
-        {project.technical && (
+        {project.metadata?.technical && (
           <section className={styles.chapter}>
             <h2 className="text-serif italic fade-in">Technical</h2>
-            <p className="drift-up">{project.technical}</p>
+            <p className="drift-up">{project.metadata.technical}</p>
           </section>
         )}
 
-        {project.lessons && (
+        {project.metadata?.lessons && (
           <section className={styles.chapter}>
             <h2 className="text-serif italic fade-in">Lessons</h2>
-            <p className="drift-up">{project.lessons}</p>
+            <p className="drift-up">{project.metadata.lessons}</p>
           </section>
         )}
       </div>

@@ -1,8 +1,9 @@
 import styles from './writing.module.css';
 import Link from 'next/link';
-import writing from '@/content/writing.json';
+import { getPublishedContentMultiType } from '@/lib/content.js';
 
-export default function Writing() {
+export default async function Writing() {
+  const writing = await getPublishedContentMultiType(['poem', 'fragment', 'essay']);
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -18,7 +19,7 @@ export default function Writing() {
             style={{ animationDelay: `${0.2 + index * 0.1}s` }}
           >
             <div className={styles.meta}>
-              <span className="text-mono">{piece.year}</span>
+              <span className="text-mono">{piece.date ? piece.date.getFullYear() : 'Unknown'}</span>
               <span className="text-mono">{piece.type}</span>
             </div>
             <h2>{piece.title}</h2>

@@ -32,9 +32,79 @@
   font-size: clamp(1.25rem, 4vw, 2.5rem);
   line-height: 2.2;
   color: var(--foreground);
-  max-width: 600px;
   width: 90vw;
   text-align: left;
+}
+
+.content.poem {
+  max-width: 600px;
+}
+
+.content.essay {
+  max-width: 900px;
+  font-size: clamp(1.1rem, 3vw, 1.8rem); /* Slightly smaller for long form */
+}
+
+/* Substack & Medium HTML overrides */
+.content img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  border-radius: 4px;
+}
+
+.content figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.content figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.content a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-underline-offset: 4px;
+}
+
+.content a:hover {
+  text-decoration-color: var(--foreground);
+}
+
+.content .captioned-image-container {
+  background: transparent !important;
+}
+
+.content .subscription-widget-wrap, 
+.content form.subscription-widget {
+  margin-top: 4rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.content input[type="email"] {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-family: var(--font-mono);
+}
+
+.content button, .content .button {
+  padding: 0.5rem 1rem;
+  background: white;
+  color: black;
+  border: none;
+  font-family: var(--font-mono);
+  cursor: pointer;
 }
 
 .emptyLine {
