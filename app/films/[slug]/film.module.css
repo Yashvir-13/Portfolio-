@@ -13,6 +13,8 @@
 
 .cinemaContainer {
   width: 100vw;
+  aspect-ratio: 2.35 / 1;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
