@@ -94,6 +94,17 @@ export default async function ContentEditor({ params, searchParams }) {
           </div>
         </div>
 
+        <div style={{ display: 'flex', gap: '1rem', padding: '1rem', backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+            <input type="checkbox" name="featured" id="featured" defaultChecked={item.featured} style={{ width: '1.2rem', height: '1.2rem' }} />
+            <label htmlFor="featured" className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)', cursor: 'pointer' }}>FEATURE ON HOMEPAGE</label>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+            <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>HOMEPAGE ORDER</label>
+            <input type="number" name="display_order" defaultValue={item.display_order || 0} style={{ padding: '0.5rem', background: 'var(--background)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)', width: '60px' }} />
+          </div>
+        </div>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>HERO IMAGE URL</label>
           <input name="hero_image" defaultValue={item.hero_image || ''} placeholder="https://media.yashvir.me/..." style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)' }} />

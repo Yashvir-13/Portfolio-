@@ -17,7 +17,9 @@ export async function saveContentAction(formData) {
     date: formData.get('date') ? new Date(formData.get('date')) : new Date(),
     hero_image: formData.get('hero_image'),
     source: formData.get('source'),
-    external_id: formData.get('external_id')
+    external_id: formData.get('external_id'),
+    featured: formData.get('featured') === 'on',
+    display_order: parseInt(formData.get('display_order') || '0', 10)
   };
 
 

@@ -18,7 +18,18 @@
   text-align: center;
 }
 
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 20vw, 18rem);
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin: 0 0 0 -0.05em; /* Optical edge alignment */
+  will-change: transform, opacity;
+}
+
 @media (min-width: 1024px) {
+  .heroTitle,
   .shot01 h1 {
     transform: translateX(-5vw);
   }
@@ -89,6 +100,7 @@
   background-color: var(--surface);
   filter: grayscale(100%);
   transition: filter 1s ease;
+  object-fit: cover;
 }
 
 .workLink:hover .asteriaVisual {
@@ -144,6 +156,7 @@
   height: 100%;
   background: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 60%);
   transition: opacity 1s ease;
+  object-fit: cover;
 }
 
 .cinemaOverlay {
@@ -209,6 +222,8 @@
   aspect-ratio: 16/9;
   background-color: var(--surface);
   margin-bottom: 1.5rem;
+  object-fit: cover;
+  display: block;
 }
 
 .photoPlaceholderTall {
@@ -216,6 +231,8 @@
   aspect-ratio: 3/4;
   background-color: var(--surface);
   margin-bottom: 1.5rem;
+  object-fit: cover;
+  display: block;
 }
 
 /* SHOT 09 */
