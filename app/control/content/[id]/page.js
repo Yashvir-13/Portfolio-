@@ -124,6 +124,27 @@ export default async function ContentEditor({ params, searchParams }) {
           <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>BODY</label>
           <textarea name="body" defaultValue={item.body} rows={10} style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)', resize: 'vertical' }} readOnly={isExternal} />
         </div>
+
+        {item.type === 'project' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '1rem', padding: '1.5rem', backgroundColor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <h3 className="text-mono" style={{ fontSize: '1rem', color: 'white', margin: 0 }}>PROJECT METADATA</h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>PROCESS</label>
+              <textarea name="meta_process" defaultValue={item.metadata?.process || ''} rows={4} style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)', resize: 'vertical' }} />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>TECHNICAL (TECH STACK)</label>
+              <textarea name="meta_technical" defaultValue={item.metadata?.technical || ''} rows={4} style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)', resize: 'vertical' }} />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>LESSONS</label>
+              <textarea name="meta_lessons" defaultValue={item.metadata?.lessons || ''} rows={4} style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)', resize: 'vertical' }} />
+            </div>
+          </div>
+        )}
         
         {isExternal && (
           <p className="text-mono" style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>

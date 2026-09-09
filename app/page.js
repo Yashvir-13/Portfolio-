@@ -14,7 +14,7 @@ export default async function Home() {
     const results = await Promise.all([
       getPublishedContent('project', { limit: 1 }),
       getPublishedContent('film', { limit: 1 }),
-      getPublishedContentMultiType(['poem', 'fragment'], { limit: 1 }),
+      getPublishedContentMultiType(['poem', 'fragment', 'essay'], { limit: 1 }),
       getPublishedContent('photograph', { limit: 3 }),
       getPublishedContent('note', { limit: 2 }),
       getPublishedContent('unfinished', { limit: 2 })
@@ -162,7 +162,10 @@ export default async function Home() {
       <section className={styles.shot07}>
         <Link href={`/writing/${activePoem.slug}`} className={styles.poetryBlock}>
           <p className="text-title drift-up">
-            {activePoem.body ? activePoem.body.substring(0, 80) + '...' : activePoem.title}
+            {activePoem.excerpt ? 
+              (activePoem.excerpt.length > 80 ? activePoem.excerpt.substring(0, 80) + '...' : activePoem.excerpt) : 
+              (activePoem.body ? activePoem.body.replace(/<[^>]+>/g, '').substring(0, 80) + '...' : activePoem.title)
+            }
           </p>
           <span className={`${styles.poetryMeta} text-meta`}>WRITING / {(activePoem.type || 'FRAGMENT').toUpperCase()} / {activePoem.date ? new Date(activePoem.date).getFullYear() : '2026'}</span>
         </Link>

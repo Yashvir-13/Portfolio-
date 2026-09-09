@@ -22,6 +22,19 @@ export default async function ProjectDetail({ params }) {
         <p className={`${styles.statement} fade-in`} style={{ animationDelay: '0.2s' }}>
           {project.excerpt}
         </p>
+        {project.external_id && project.external_id.includes('github.com') && (
+          <div className="fade-in" style={{ animationDelay: '0.4s', marginTop: '2rem' }}>
+            <a 
+              href={project.external_id} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-mono"
+              style={{ border: '1px solid rgba(255,255,255,0.2)', padding: '0.8rem 2rem', display: 'inline-block', opacity: 0.8 }}
+            >
+              VIEW ON GITHUB
+            </a>
+          </div>
+        )}
       </header>
 
       {project.hero_image ? (
