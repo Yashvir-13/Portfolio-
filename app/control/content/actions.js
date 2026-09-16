@@ -46,7 +46,7 @@ export async function saveContentAction(formData) {
     date: date,
     hero_image: formData.get('hero_image') || '',
     source: formData.get('source') || 'native',
-    external_id: formData.get('external_id') || '',
+    external_id: formData.get('external_id') || null,
     featured: formData.get('featured') === 'on',
     display_order: parseInt(formData.get('display_order') || '0', 10),
     metadata
