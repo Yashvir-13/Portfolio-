@@ -3,22 +3,18 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
 /**
- * ParticleImage — a mystical dust-to-portrait animation.
- * 
- * Tiny luminous motes drift in darkness, then slowly coalesce 
- * into the silhouette of an image. Particles glow, breathe, 
- * and scatter when the cursor passes through them.
+ * ParticleImage — The photograph is clearly visible. Its edges dissolve
+ * into luminous dust motes that float and drift. Ambient golden particles
+ * hang in the air like pollen in sunlight. Mouse scatters nearby dust.
  */
 export default function ParticleImage({ src, className }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const animRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Resize-aware dimensions
   const getDimensions = useCallback(() => {
     const el = containerRef.current;
-    if (!el) return { w: 300, h: 400 };
+    if (!el) return { w: 400, h: 530 };
     return { w: el.clientWidth, h: el.clientHeight };
   }, []);
 
@@ -36,13 +32,11 @@ export default function ParticleImage({ src, className }) {
     canvas.style.height = `${h}px`;
     ctx.scale(dpr, dpr);
 
-    let particles = [];
+    let edgeParticles = [];
+    let ambientParticles = [];
     let frameId;
-    let mouse = { x: -9999, y: -9999, radius: 80 };
-    let startTime = 0;
-    const GATHER_DURATION = 4000; // ms — how long the initial gathering takes
+    let mouse = { x: -9999, y: -9999, radius: 70 };
 
-    // Proxy external images for CORS
     const isExternal = src.startsWith('http');
     const proxiedSrc = isExternal
       ? `/api/proxy-image?url=${encodeURIComponent(src)}`
@@ -53,7 +47,7 @@ export default function ParticleImage({ src, className }) {
     img.src = proxiedSrc;
 
     img.onload = () => {
-      // ── 1. Extract pixel data at canvas size ──
+      // ── Offscreen: draw the image and sample edge pixels ──
       const off = document.createElement('canvas');
       const offCtx = off.getContext('2d', { willReadFrequently: true });
       off.width = w;
@@ -70,159 +64,222 @@ export default function ParticleImage({ src, className }) {
       const imageData = offCtx.getImageData(0, 0, w, h);
       const data = imageData.data;
 
-      // ── 2. Sparse sampling → luminous particles ──
-      // Much sparser than before: every 6th pixel → fewer, 
-      // more distinct particles that read as individual motes.
-      const step = 6;
-      const maxParticles = 6000; // hard cap for performance
-      const candidates = [];
+      // ── Create a dissolution mask ──
+      // Pixels near edges have higher chance of becoming particles.
+      // The mask stores a "dissolution probability" per pixel.
+      const edgeThickness = Math.min(w, h) * 0.22; // how deep the dissolution reaches
+      
+      // Also create the "intact image" — the image with edge pixels erased
+      const intactCanvas = document.createElement('canvas');
+      const intactCtx = intactCanvas.getContext('2d');
+      intactCanvas.width = w;
+      intactCanvas.height = h;
+      intactCtx.drawImage(off, 0, 0);
+      const intactData = intactCtx.getImageData(0, 0, w, h);
+
+      const step = 3; // sample density for edge particles
 
       for (let y = 0; y < h; y += step) {
         for (let x = 0; x < w; x += step) {
+          // Distance from nearest edge
+          const distFromEdge = Math.min(x, y, w - x, h - y);
+          
+          if (distFromEdge >= edgeThickness) continue;
+
+          // Dissolution probability: 1.0 at edge → 0.0 at edgeThickness
+          const prob = 1.0 - (distFromEdge / edgeThickness);
+          // Use a curve so dissolution concentrates at the very edge
+          const dissolveFactor = Math.pow(prob, 1.8);
+          
+          if (Math.random() > dissolveFactor) continue;
+
           const i = (y * w + x) * 4;
-          const a = data[i + 3];
+          const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
           if (a < 20) continue;
 
-          const r = data[i], g = data[i + 1], b = data[i + 2];
-          // Calculate luminance to bias towards brighter areas
-          const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+          // Erase this pixel region from the intact image
+          for (let dy = 0; dy < step; dy++) {
+            for (let dx = 0; dx < step; dx++) {
+              const px = x + dx, py = y + dy;
+              if (px < w && py < h) {
+                const idx = (py * w + px) * 4;
+                intactData.data[idx + 3] = 0; // make transparent
+              }
+            }
+          }
 
-          candidates.push({ x, y, r, g, b, a, lum });
+          // Determine drift direction (away from center)
+          const cx = w / 2, cy = h / 2;
+          const angleFromCenter = Math.atan2(y - cy, x - cx);
+          const driftDist = 10 + Math.random() * 40;
+
+          // Warm up the color slightly for the glow
+          const warmR = Math.min(255, r + 20);
+          const warmG = Math.min(255, g + 10);
+          const warmB = b;
+
+          edgeParticles.push({
+            x: x + (Math.random() - 0.5) * step,
+            y: y + (Math.random() - 0.5) * step,
+            baseX: x + Math.cos(angleFromCenter) * driftDist * (0.5 + Math.random()),
+            baseY: y + Math.sin(angleFromCenter) * driftDist * (0.5 + Math.random()),
+            vx: 0,
+            vy: 0,
+            r: warmR, g: warmG, b: warmB,
+            alpha: (a / 255) * (0.5 + Math.random() * 0.5),
+            size: 0.8 + Math.random() * 1.5,
+            glowSize: 2.5 + Math.random() * 3.5,
+            friction: 0.93 + Math.random() * 0.04,
+            ease: 0.008 + Math.random() * 0.015,
+            breathPhase: Math.random() * Math.PI * 2,
+            breathSpeed: 0.0008 + Math.random() * 0.0015,
+            breathAmp: 1.5 + Math.random() * 3,
+          });
         }
       }
 
-      // If too many, keep a random subset biased towards bright areas
-      let selected = candidates;
-      if (selected.length > maxParticles) {
-        // Sort by luminance descending, keep top portion + random sample of rest
-        selected.sort((a, b) => b.lum - a.lum);
-        const keep = Math.floor(maxParticles * 0.6);
-        const bright = selected.slice(0, keep);
-        const rest = selected.slice(keep);
-        // Shuffle rest and take what we need
-        for (let i = rest.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [rest[i], rest[j]] = [rest[j], rest[i]];
-        }
-        selected = [...bright, ...rest.slice(0, maxParticles - keep)];
-      }
+      // Write the erased image back
+      intactCtx.putImageData(intactData, 0, 0);
 
-      // Create particles from selected points
-      for (const pt of selected) {
-        // Random spawn position — scattered far from the image
-        const angle = Math.random() * Math.PI * 2;
-        const dist = w * 0.6 + Math.random() * w * 0.8;
-        const spawnX = w / 2 + Math.cos(angle) * dist;
-        const spawnY = h / 2 + Math.sin(angle) * dist;
+      // ── Ambient floating dust ──
+      // Sparse golden/warm motes that float across the whole image
+      const ambientCount = 80 + Math.floor(Math.random() * 40);
+      for (let i = 0; i < ambientCount; i++) {
+        const px = Math.random() * w;
+        const py = Math.random() * h;
+        
+        // Sample color from image at this position, warm it up
+        const si = (Math.floor(py) * w + Math.floor(px)) * 4;
+        const sr = data[si] || 200;
+        const sg = data[si + 1] || 180;
+        const sb = data[si + 2] || 140;
+        
+        // Shift towards warm golden
+        const ar = Math.min(255, sr * 0.6 + 200 * 0.4);
+        const ag = Math.min(255, sg * 0.5 + 180 * 0.5);
+        const ab = Math.min(255, sb * 0.3 + 100 * 0.7);
 
-        // Slight color shift for variety (mystical feel)
-        const hueShift = (Math.random() - 0.5) * 15;
-        const rr = Math.min(255, Math.max(0, pt.r + hueShift));
-        const gg = Math.min(255, Math.max(0, pt.g + hueShift * 0.5));
-        const bb = Math.min(255, Math.max(0, pt.b + hueShift));
-
-        particles.push({
-          // Current position (starts scattered)
-          x: spawnX,
-          y: spawnY,
-          // Target position in the portrait
-          baseX: pt.x,
-          baseY: pt.y,
-          // Velocity
-          vx: 0,
-          vy: 0,
-          // Visual
-          r: rr, g: gg, b: bb,
-          baseAlpha: (pt.a / 255) * (0.4 + pt.lum * 0.6),
-          alpha: 0, // fades in
-          size: 1.2 + Math.random() * 1.5, // tiny circles, not big squares
-          glowSize: 3 + Math.random() * 4,
-          // Physics
-          friction: 0.92 + Math.random() * 0.04,
-          ease: 0.015 + Math.random() * 0.025,
-          // Animation offsets
-          delay: Math.random() * 2000, // stagger the gathering
+        ambientParticles.push({
+          x: px,
+          y: py,
+          baseX: px,
+          baseY: py,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: -0.1 - Math.random() * 0.3, // gentle upward drift
+          r: ar, g: ag, b: ab,
+          alpha: 0.15 + Math.random() * 0.35,
+          size: 0.6 + Math.random() * 1.8,
+          glowSize: 3 + Math.random() * 5,
           breathPhase: Math.random() * Math.PI * 2,
-          breathSpeed: 0.001 + Math.random() * 0.002,
-          driftX: (Math.random() - 0.5) * 0.3,
-          driftY: (Math.random() - 0.5) * 0.3,
+          breathSpeed: 0.0005 + Math.random() * 0.001,
+          breathAmp: 2 + Math.random() * 5,
+          driftSpeed: 0.1 + Math.random() * 0.3,
+          twinklePhase: Math.random() * Math.PI * 2,
+          twinkleSpeed: 0.002 + Math.random() * 0.004,
         });
       }
 
-      startTime = performance.now();
       setIsLoaded(true);
 
-      // ── 3. Render loop ──
+      // ── Render loop ──
       const animate = (now) => {
-        const elapsed = now - startTime;
+        ctx.clearRect(0, 0, w, h);
 
-        // Dark background with slight trail effect (ghostly afterimages)
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-        ctx.fillRect(0, 0, w, h);
+        // 1. Draw the intact image (center preserved, edges erased)
+        ctx.drawImage(intactCanvas, 0, 0);
 
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-
-          // ── Gathering progress (0 → 1) with individual delay ──
-          const pElapsed = Math.max(0, elapsed - p.delay);
-          const progress = Math.min(1, pElapsed / GATHER_DURATION);
-          // Smooth ease-out curve
-          const eased = 1 - Math.pow(1 - progress, 3);
-
-          // Fade alpha in over time
-          p.alpha = p.baseAlpha * Math.min(1, pElapsed / 1500);
-
-          // ── Mouse repulsion ──
+        // 2. Draw edge dissolution particles
+        for (const p of edgeParticles) {
+          // Mouse repulsion
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
           const distSq = dx * dx + dy * dy;
-          const mouseR = mouse.radius;
-
-          if (distSq < mouseR * mouseR) {
+          if (distSq < mouse.radius * mouse.radius) {
             const dist = Math.sqrt(distSq);
-            const force = (mouseR - dist) / mouseR;
+            const force = (mouse.radius - dist) / mouse.radius;
             const angle = Math.atan2(dy, dx);
-            p.vx -= Math.cos(angle) * force * 6;
-            p.vy -= Math.sin(angle) * force * 6;
+            p.vx -= Math.cos(angle) * force * 4;
+            p.vy -= Math.sin(angle) * force * 4;
           }
 
-          // ── Breathing / idle drift (even when settled) ──
-          const breathX = Math.sin(now * p.breathSpeed + p.breathPhase) * 0.6;
-          const breathY = Math.cos(now * p.breathSpeed * 0.8 + p.breathPhase) * 0.6;
+          // Breathing drift
+          const bx = Math.sin(now * p.breathSpeed + p.breathPhase) * p.breathAmp;
+          const by = Math.cos(now * p.breathSpeed * 0.7 + p.breathPhase) * p.breathAmp * 0.6;
 
-          // ── Spring towards target (strength grows with eased progress) ──
-          const targetX = p.baseX + breathX + p.driftX;
-          const targetY = p.baseY + breathY + p.driftY;
-          p.vx += (targetX - p.x) * p.ease * eased;
-          p.vy += (targetY - p.y) * p.ease * eased;
-
-          // Friction
+          // Spring towards base + breath
+          p.vx += (p.baseX + bx - p.x) * p.ease;
+          p.vy += (p.baseY + by - p.y) * p.ease;
           p.vx *= p.friction;
           p.vy *= p.friction;
-
-          // Update
           p.x += p.vx;
           p.y += p.vy;
 
-          // ── Draw: glowing circle ──
           if (p.alpha < 0.01) continue;
 
           // Outer glow
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * 0.08})`;
+          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * 0.12})`;
           ctx.fill();
 
-          // Inner bright core
+          // Core
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * 0.7})`;
+          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * 0.8})`;
           ctx.fill();
 
-          // Bright white center speck (star-like)
+          // Bright center
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.35, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 240, ${p.alpha * 0.4})`;
+          ctx.fill();
+        }
+
+        // 3. Draw ambient floating dust
+        for (const p of ambientParticles) {
+          // Mouse repulsion (gentler)
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < mouse.radius * mouse.radius) {
+            const dist = Math.sqrt(distSq);
+            const force = (mouse.radius - dist) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            p.x -= Math.cos(angle) * force * 2;
+            p.y -= Math.sin(angle) * force * 2;
+          }
+
+          // Float
+          p.x += Math.sin(now * p.breathSpeed + p.breathPhase) * p.driftSpeed * 0.3;
+          p.y += p.vy * 0.15;
+
+          // Wrap around
+          if (p.y < -10) p.y = h + 10;
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+
+          // Twinkle
+          const twinkle = 0.5 + 0.5 * Math.sin(now * p.twinkleSpeed + p.twinklePhase);
+          const a = p.alpha * twinkle;
+
+          if (a < 0.02) continue;
+
+          // Glow
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${a * 0.1})`;
+          ctx.fill();
+
+          // Core
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${a * 0.7})`;
+          ctx.fill();
+
+          // Bright speck
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.3})`;
+          ctx.fillStyle = `rgba(255, 255, 230, ${a * 0.5})`;
           ctx.fill();
         }
 
@@ -232,18 +289,14 @@ export default function ParticleImage({ src, className }) {
       frameId = requestAnimationFrame(animate);
     };
 
-    // ── Event handlers ──
+    // ── Events ──
     const container = containerRef.current;
-
     const onMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
-    const onMouseLeave = () => {
-      mouse.x = -9999;
-      mouse.y = -9999;
-    };
+    const onMouseLeave = () => { mouse.x = -9999; mouse.y = -9999; };
     const onTouchMove = (e) => {
       if (e.touches.length > 0) {
         const rect = container.getBoundingClientRect();
@@ -280,7 +333,6 @@ export default function ParticleImage({ src, className }) {
         cursor: 'crosshair',
         opacity: isLoaded ? 1 : 0,
         transition: 'opacity 1.5s ease',
-        background: 'black',
       }}
     >
       <canvas
