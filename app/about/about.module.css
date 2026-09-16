@@ -28,6 +28,13 @@
   transform: rotate(-1.5deg);
 }
 
+.portraitParticle {
+  width: 100%;
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: visible;
+}
+
 .textSection {
   max-width: 700px;
 }
@@ -77,10 +84,17 @@
     margin: 0 auto;
     transform: none;
   }
+  .portraitParticle {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
   .portrait {
+    width: 100%;
+  }
+  .portraitParticle {
     width: 100%;
   }
 }

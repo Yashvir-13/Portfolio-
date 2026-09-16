@@ -33,7 +33,7 @@ export default async function About() {
         {settings.profile_pic_url ? (
           <ParticleImage 
             src={settings.profile_pic_url} 
-            className={`${styles.portrait} reveal-image cinematic-image`}
+            className={`${styles.portraitParticle}`}
           />
         ) : (
           <div className={`${styles.portrait} reveal-image cinematic-image`} />
