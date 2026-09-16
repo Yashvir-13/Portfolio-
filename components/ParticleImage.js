@@ -25,9 +25,12 @@ export default function ParticleImage({ src, width = 300, height = 400, classNam
     let animationFrameId;
     let mouse = { x: -1000, y: -1000, radius: 60 };
 
+    const isExternal = src.startsWith('http');
+    const proxiedSrc = isExternal ? `/api/proxy-image?url=${encodeURIComponent(src)}` : src;
+
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.src = src;
+    img.src = proxiedSrc;
 
     img.onload = () => {
       // 1. Draw image to offscreen canvas to extract pixel data
