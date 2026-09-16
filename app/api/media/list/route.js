@@ -9,6 +9,7 @@ export async function GET() {
     
     // List all files in the bucket
     let fileList = await files.list();
+    let items = fileList.items || [];
     
     // Format into URLs
     const endpoint = process.env.AWS_ENDPOINT_URL_S3;
@@ -19,7 +20,7 @@ export async function GET() {
     // Normalize endpoint (some endpoints might end with slash, some not)
     const baseUrl = endpoint.endsWith('/') ? endpoint.slice(0, -1) : endpoint;
     
-    let formattedList = (fileList || []).map(file => ({
+    let formattedList = items.map(file => ({
       key: file.key,
       size: file.size,
       lastModified: file.lastModified,

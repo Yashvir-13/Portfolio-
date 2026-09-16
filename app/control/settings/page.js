@@ -1,6 +1,7 @@
 import styles from '../control.module.css';
 import { getSettings } from '@/lib/content.js';
 import { saveSettings } from './actions.js';
+import MediaPicker from '@/components/MediaPicker.js';
 
 export default async function SettingsPage() {
   const settings = await getSettings();
@@ -14,13 +15,7 @@ export default async function SettingsPage() {
       <form action={saveSettings} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '600px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Profile Picture URL</label>
-          <input 
-            type="url" 
-            name="profile_pic_url" 
-            defaultValue={settings.profile_pic_url || ''} 
-            placeholder="https://..."
-            style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)' }}
-          />
+          <MediaPicker name="profile_pic_url" defaultValue={settings.profile_pic_url || ''} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
