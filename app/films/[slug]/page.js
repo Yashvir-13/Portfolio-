@@ -42,7 +42,11 @@ export default async function FilmDetail({ params }) {
         ) : (
           <div className={styles.videoPlaceholder}>
             {film.hero_image ? (
-              <img src={film.hero_image} alt={film.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              film.hero_image.match(/\.(mp4|webm|ogg)$/i) ? (
+                <video src={film.hero_image} controls autoPlay playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', background: 'black' }} />
+              ) : (
+                <img src={film.hero_image} alt={film.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              )
             ) : (
               <span className={`${styles.videoLabel} text-mono fade-in`} style={{ animationDelay: '2s' }}>{timeString}</span>
             )}

@@ -38,7 +38,18 @@ export default async function ProjectDetail({ params }) {
       </header>
 
       {project.hero_image ? (
-        <img src={project.hero_image} className={`${styles.heroVisual} reveal-image cinematic-image`} alt={project.title} />
+        project.hero_image.match(/\.(mp4|webm|ogg)$/i) ? (
+          <video 
+            src={project.hero_image} 
+            className={`${styles.heroVisual} reveal-image cinematic-image`} 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+          />
+        ) : (
+          <img src={project.hero_image} className={`${styles.heroVisual} reveal-image cinematic-image`} alt={project.title} />
+        )
       ) : (
         <div className={`${styles.heroVisual} reveal-image cinematic-image`} />
       )}

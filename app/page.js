@@ -103,11 +103,11 @@ export default async function Home() {
 
       {/* SHOT 02 — HUGE PHOTOGRAPH */}
       <section className={styles.shot02}>
-        <img
-          src={photo0Image}
-          className={`${styles.shot02Image} reveal-image cinematic-image`}
-          alt={photo0.title || 'Archive'}
-        />
+        {photo0Image.match(/\.(mp4|webm|ogg)$/i) ? (
+          <video src={photo0Image} className={`${styles.shot02Image} reveal-image cinematic-image`} autoPlay muted loop playsInline />
+        ) : (
+          <img src={photo0Image} className={`${styles.shot02Image} reveal-image cinematic-image`} alt={photo0.title || 'Archive'} />
+        )}
         <span className={`${styles.shot02Meta} text-mono fade-in`} style={{ animationDelay: '1.5s' }}>
           02:17 AM / UNKNOWN / 2026
         </span>
@@ -123,11 +123,11 @@ export default async function Home() {
       {/* SHOT 04 — SELECTED WORK */}
       <section className={styles.shot04}>
         <Link href={`/work/${activeProject.slug}`} className={styles.workLink}>
-          <img
-            src={projectImage}
-            className={`${styles.asteriaVisual} reveal-image cinematic-image`}
-            alt={activeProject.title}
-          />
+          {projectImage.match(/\.(mp4|webm|ogg)$/i) ? (
+            <video src={projectImage} className={`${styles.asteriaVisual} reveal-image cinematic-image`} autoPlay muted loop playsInline />
+          ) : (
+            <img src={projectImage} className={`${styles.asteriaVisual} reveal-image cinematic-image`} alt={activeProject.title} />
+          )}
           <h2 className={`${styles.asteriaTitle} text-hero fade-in`}>{activeProject.title.toUpperCase()}</h2>
           <div className={styles.asteriaMeta}>
             <span className="text-mono">{activeProject.metadata?.category?.toUpperCase() || 'PROJECT'}</span>
@@ -146,11 +146,11 @@ export default async function Home() {
       {/* SHOT 06 — CINEMA */}
       <section className={styles.shot06}>
         <Link href={`/films/${activeFilm.slug}`} className={styles.cinemaLink}>
-          <img
-            src={filmImage}
-            className={`${styles.cinemaStill} reveal-image cinematic-image`}
-            alt={activeFilm.title}
-          />
+          {filmImage.match(/\.(mp4|webm|ogg)$/i) ? (
+            <video src={filmImage} className={`${styles.cinemaStill} reveal-image cinematic-image`} autoPlay muted loop playsInline />
+          ) : (
+            <img src={filmImage} className={`${styles.cinemaStill} reveal-image cinematic-image`} alt={activeFilm.title} />
+          )}
           <div className={styles.cinemaOverlay}>
             <h3 className="text-title">{activeFilm.title.toUpperCase()}</h3>
             <span className="text-meta">FILM / {activeFilm.metadata?.duration || 'UNKNOWN'} / {activeFilm.date ? new Date(activeFilm.date).getFullYear() : '2026'}</span>
@@ -175,20 +175,19 @@ export default async function Home() {
       <section className={styles.shot08}>
         <div className={styles.contactSheet}>
           <div className={styles.photoLeft}>
-            <img
-              src={photo1Image}
-              className={`${styles.photoPlaceholder} reveal-image cinematic-image`}
-              alt={photo1.title || 'Archive Photography'}
-            />
+            {photo1Image.match(/\.(mp4|webm|ogg)$/i) ? (
+              <video src={photo1Image} className={`${styles.photoPlaceholder} reveal-image cinematic-image`} autoPlay muted loop playsInline />
+            ) : (
+              <img src={photo1Image} className={`${styles.photoPlaceholder} reveal-image cinematic-image`} alt={photo1.title || 'Archive Photography'} />
+            )}
             <span className="text-meta">{photo1.metadata?.location?.toUpperCase() || 'ARCHIVE'} / 02:17</span>
           </div>
           <div className={styles.photoRight}>
-            <img
-              src={photo2Image}
-              className={`${styles.photoPlaceholderTall} reveal-image cinematic-image`}
-              style={{ animationDelay: '0.2s' }}
-              alt={photo2.title || 'Archive Photography'}
-            />
+            {photo2Image.match(/\.(mp4|webm|ogg)$/i) ? (
+              <video src={photo2Image} className={`${styles.photoPlaceholderTall} reveal-image cinematic-image`} style={{ animationDelay: '0.2s' }} autoPlay muted loop playsInline />
+            ) : (
+              <img src={photo2Image} className={`${styles.photoPlaceholderTall} reveal-image cinematic-image`} style={{ animationDelay: '0.2s' }} alt={photo2.title || 'Archive Photography'} />
+            )}
             <span className="text-meta">{photo2.metadata?.location?.toUpperCase() || 'ARCHIVE'} / UNKNOWN</span>
           </div>
         </div>
