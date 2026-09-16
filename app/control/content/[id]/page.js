@@ -2,6 +2,7 @@ import styles from '../../control.module.css';
 import { getContentById } from '@/lib/content.js';
 import { saveContentAction, archiveContentAction } from '../actions.js';
 import Link from 'next/link';
+import MediaPicker from '@/components/MediaPicker.js';
 
 export default async function ContentEditor({ params, searchParams }) {
   const { id } = await params;
@@ -107,7 +108,7 @@ export default async function ContentEditor({ params, searchParams }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <label className="text-mono" style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>HERO IMAGE URL</label>
-          <input name="hero_image" defaultValue={item.hero_image || ''} placeholder="https://media.yashvir.me/..." style={{ padding: '0.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: 'white', fontFamily: 'var(--font-mono)' }} />
+          <MediaPicker name="hero_image" defaultValue={item.hero_image || ''} readOnly={isExternal} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
