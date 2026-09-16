@@ -20,21 +20,36 @@ export default function MediaPage() {
     setUploadedUrl('');
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-
+      // 1. Request presigned URL from our API
       const res = await fetch('/api/upload', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: file.name, contentType: file.type || 'application/octet-stream' }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to upload');
+        throw new Error(data.error || 'Failed to initialize upload');
       }
 
-      setUploadedUrl(data.url);
+      const { uploadUrl, method, headers, publicUrl } = data;
+
+      // 2. Upload the actual file bytes directly to Neon Object Storage
+      const uploadRes = await fetch(uploadUrl, {
+        method: method || 'PUT',
+        headers: {
+          ...headers,
+          'Content-Type': file.type || 'application/octet-stream'
+        },
+        body: file,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error('Failed to upload file bytes to storage bucket');
+      }
+
+      setUploadedUrl(publicUrl);
       fileInput.value = ''; // Reset input
     } catch (err) {
       setError(err.message);
