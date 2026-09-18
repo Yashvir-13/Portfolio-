@@ -8,16 +8,23 @@
   display: flex;
   justify-content: space-between;
   padding: 0 5vw;
-  margin-bottom: 10vh;
+  margin-bottom: 15vh;
   opacity: 0.3;
 }
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 10vw;
-  align-items: center;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2vw;
+  align-items: start;
   padding: 0 5vw;
+}
+
+.portraitWrapper {
+  grid-column: 7 / 13;
+  grid-row: 1 / 6;
+  margin-top: 15vh;
+  z-index: 1;
 }
 
 .portrait {
@@ -39,29 +46,50 @@
 }
 
 .textSection {
-  max-width: 700px;
+  display: contents;
+}
+
+.richText {
+  display: contents;
 }
 
 .intro {
+  grid-column: 1 / 9;
+  grid-row: 1;
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  line-height: 1.3;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  line-height: 1.15;
   color: var(--foreground);
-  margin-bottom: 5rem;
+  margin-top: 0;
+  margin-bottom: 12vh;
+  z-index: 2;
+  position: relative;
+  pointer-events: none;
+}
+
+.intro::selection {
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .body {
+  grid-column: 2 / 6;
   font-size: 1.15rem;
   line-height: 2;
   color: var(--muted);
-  margin-bottom: 2rem;
+  margin-bottom: 4vh;
+  z-index: 2;
+  position: relative;
 }
 
 .links {
-  margin-top: 8rem;
+  grid-column: 2 / 6;
+  margin-top: 8vh;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  z-index: 2;
+  position: relative;
 }
 
 .links a {
@@ -79,21 +107,52 @@
 
 @media (max-width: 1024px) {
   .content {
-    grid-template-columns: 1fr;
-    gap: 10rem;
+    display: flex;
+    flex-direction: column;
   }
-  .portrait {
-    width: 80%;
-    margin: 0 auto;
-    transform: rotate(0deg) translateZ(0);
+  
+  .intro {
+    order: 1;
+    width: 100%;
+    margin-bottom: 8vh;
   }
-  .portrait:hover {
-    transform: rotate(0deg) scale(1.02) translateZ(0);
+  
+  .portraitWrapper {
+    order: 2;
+    width: 65%;
+    margin: 0 0 10vh auto; /* right-aligned asymmetry */
+    align-self: flex-end;
+  }
+
+  .body {
+    order: 3;
+    margin-left: 5vw;
+    max-width: 85%;
+  }
+
+  .links {
+    order: 4;
+    margin-left: 5vw;
+    margin-top: 5vh;
   }
 }
 
 @media (max-width: 768px) {
-  .portrait {
-    width: 100%;
+  .intro {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+  
+  .portraitWrapper {
+    width: 85%;
+    margin: 0 0 8vh auto; /* Keep it slightly off-center right */
+  }
+
+  .body {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .links {
+    margin-left: 0;
   }
 }

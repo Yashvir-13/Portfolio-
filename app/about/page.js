@@ -28,21 +28,23 @@ export default async function About() {
       </div>
 
       <div className={styles.content}>
-        {settings.profile_pic_url ? (
-          <img 
-            src={settings.profile_pic_url} 
-            className={`${styles.portrait} reveal-image cinematic-image`}
-            alt="Portrait"
-          />
-        ) : (
-          <div className={`${styles.portrait} reveal-image cinematic-image`} />
-        )}
+        <div className={styles.portraitWrapper}>
+          {settings.profile_pic_url ? (
+            <img 
+              src={settings.profile_pic_url} 
+              className={`${styles.portrait} reveal-image cinematic-image`}
+              alt="Portrait"
+            />
+          ) : (
+            <div className={`${styles.portrait} reveal-image cinematic-image`} />
+          )}
+        </div>
 
         <div className={styles.textSection}>
           {settings.about_text ? (
-            <div dangerouslySetInnerHTML={{ __html: settings.about_text }} />
+            <div className={styles.richText} dangerouslySetInnerHTML={{ __html: settings.about_text }} />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: defaultAbout }} />
+            <div className={styles.richText} dangerouslySetInnerHTML={{ __html: defaultAbout }} />
           )}
 
           <div className={`${styles.links} fade-in`} style={{ animationDelay: '1.2s' }}>
