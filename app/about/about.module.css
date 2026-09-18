@@ -24,15 +24,18 @@
   width: 100%;
   aspect-ratio: 3/4;
   background-color: var(--surface);
+  object-fit: cover;
+  
   /* documentary style slight tilt */
-  transform: rotate(-1.5deg);
+  transform: rotate(-1.5deg) translateZ(0);
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease, box-shadow 1.2s ease;
 }
 
-.portraitParticle {
-  width: 100%;
-  aspect-ratio: 3/4;
-  position: relative;
-  overflow: visible;
+.portrait:hover {
+  transform: rotate(-1.5deg) scale(1.02) translateZ(0);
+  filter: grayscale(0%) brightness(1.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 .textSection {
@@ -82,19 +85,15 @@
   .portrait {
     width: 80%;
     margin: 0 auto;
-    transform: none;
+    transform: rotate(0deg) translateZ(0);
   }
-  .portraitParticle {
-    width: 80%;
-    margin: 0 auto;
+  .portrait:hover {
+    transform: rotate(0deg) scale(1.02) translateZ(0);
   }
 }
 
 @media (max-width: 768px) {
   .portrait {
-    width: 100%;
-  }
-  .portraitParticle {
     width: 100%;
   }
 }

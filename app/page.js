@@ -44,7 +44,17 @@ export default async function Home() {
     metadata: { category: 'Artifact / System' },
     date: new Date('2026-01-01'),
   };
-  const projectImage = activeProject.hero_image || '/images/fathom.png';
+  // Helper to extract YouTube thumbnail if URL is a YouTube link
+  const getThumbnail = (url) => {
+    if (!url) return '';
+    const ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+    if (ytMatch) {
+      return `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
+    }
+    return url;
+  };
+
+  const projectImage = getThumbnail(activeProject.hero_image || '/images/fathom.png');
 
   const activeFilm = latestFilm || {
     title: 'Untitled (Isolation)',
@@ -53,7 +63,7 @@ export default async function Home() {
     metadata: { duration: '14 MIN' },
     date: new Date('2026-01-01'),
   };
-  const filmImage = activeFilm.hero_image || '/images/fire.jpg';
+  const filmImage = getThumbnail(activeFilm.hero_image || '/images/fire.jpg');
 
   const activePoem = latestPoem || {
     title: 'Again',
@@ -68,21 +78,21 @@ export default async function Home() {
     title: 'Archive Sky',
     metadata: { location: 'NORTHERN VOID' },
   };
-  const photo0Image = photo0.hero_image || '/images/sky.jpg';
+  const photo0Image = getThumbnail(photo0.hero_image || '/images/sky.jpg');
 
   const photo1 = latestPhotos[1] || {
     hero_image: '/images/tree.jpg',
     title: 'Archive Canopy',
     metadata: { location: 'NORTHERN CANOPY' },
   };
-  const photo1Image = photo1.hero_image || '/images/tree.jpg';
+  const photo1Image = getThumbnail(photo1.hero_image || '/images/tree.jpg');
 
   const photo2 = latestPhotos[2] || {
     hero_image: '/images/fire.jpg',
     title: 'Archive Night',
     metadata: { location: 'OBSERVATORY' },
   };
-  const photo2Image = photo2.hero_image || '/images/fire.jpg';
+  const photo2Image = getThumbnail(photo2.hero_image || '/images/fire.jpg');
 
   const activeNotes = latestNotes.length > 0 ? latestNotes : [
     { slug: 'on-time', title: 'On Time', body: 'Time inside an archive moves differently than time outside.' },

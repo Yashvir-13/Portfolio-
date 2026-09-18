@@ -52,6 +52,14 @@
   background-color: #1a1a18;
   background-image: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 80%);
   object-fit: cover;
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease;
+  transform: translateZ(0);
+}
+
+.shot02:hover .shot02Image {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.02) translateZ(0);
 }
 
 .shot02Meta {
@@ -98,13 +106,15 @@
   width: 70vw;
   height: 90vh;
   background-color: var(--surface);
-  filter: grayscale(100%);
-  transition: filter 1s ease;
   object-fit: cover;
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease;
+  transform: translateZ(0);
 }
 
 .workLink:hover .asteriaVisual {
-  filter: grayscale(30%);
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.02) translateZ(0);
 }
 
 .asteriaTitle {
@@ -155,8 +165,10 @@
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 60%);
-  transition: opacity 1s ease;
   object-fit: cover;
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease, opacity 1s ease;
+  transform: translateZ(0);
 }
 
 .cinemaOverlay {
@@ -174,7 +186,9 @@
 }
 
 .cinemaLink:hover .cinemaStill {
-  opacity: 0.3;
+  opacity: 0.6;
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.02) translateZ(0);
 }
 
 /* SHOT 07 */
@@ -224,6 +238,9 @@
   margin-bottom: 1.5rem;
   object-fit: cover;
   display: block;
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease;
+  transform: translateZ(0);
 }
 
 .photoPlaceholderTall {
@@ -233,6 +250,15 @@
   margin-bottom: 1.5rem;
   object-fit: cover;
   display: block;
+  filter: grayscale(100%) brightness(0.9);
+  transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 1.2s ease;
+  transform: translateZ(0);
+}
+
+.photoLeft:hover .photoPlaceholder,
+.photoRight:hover .photoPlaceholderTall {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.02) translateZ(0);
 }
 
 /* SHOT 09 */

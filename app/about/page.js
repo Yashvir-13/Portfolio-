@@ -1,7 +1,5 @@
 import styles from './about.module.css';
 import { getSettings } from '@/lib/content.js';
-import ParticleImage from '@/components/ParticleImage.js';
-
 export default async function About() {
   const settings = await getSettings();
 
@@ -31,9 +29,10 @@ export default async function About() {
 
       <div className={styles.content}>
         {settings.profile_pic_url ? (
-          <ParticleImage 
+          <img 
             src={settings.profile_pic_url} 
-            className={`${styles.portraitParticle}`}
+            className={`${styles.portrait} reveal-image cinematic-image`}
+            alt="Portrait"
           />
         ) : (
           <div className={`${styles.portrait} reveal-image cinematic-image`} />
