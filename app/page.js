@@ -63,7 +63,7 @@ export default async function Home() {
     metadata: { duration: '14 MIN' },
     date: new Date('2026-01-01'),
   };
-  const filmImage = getThumbnail(activeFilm.hero_image || '/images/fire.jpg');
+  const filmImage = getThumbnail(activeFilm.hero_image || activeFilm.thumbnail || activeFilm.canonical_url || '/images/fire.jpg');
 
   const activePoem = latestPoem || {
     title: 'Again',

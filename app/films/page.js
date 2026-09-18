@@ -4,6 +4,16 @@ import { getPublishedContent } from '@/lib/content.js';
 
 export default async function Films() {
   const films = await getPublishedContent('film');
+
+  const getThumbnail = (url) => {
+    if (!url) return '';
+    const ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+    if (ytMatch) {
+      return `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
+    }
+    return url;
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -18,8 +28,8 @@ export default async function Films() {
             className={`${styles.filmItem} fade-in`}
             style={{ animationDelay: `${0.2 + index * 0.1}s` }}
           >
-            {film.hero_image ? (
-              <img src={film.hero_image} className={`${styles.posterPlaceholder} cinematic-image`} alt={film.title} />
+            { (film.hero_image || film.thumbnail || film.canonical_url) ? (
+              <img src={getThumbnail(film.hero_image || film.thumbnail || film.canonical_url)} className={`${styles.posterPlaceholder} cinematic-image`} alt={film.title} />
             ) : (
               <div className={styles.posterPlaceholder} />
             )}
