@@ -57,13 +57,15 @@ export default async function Home() {
   const projectImage = getThumbnail(activeProject.hero_image || '/images/fathom.png');
 
   const activeFilm = latestFilm || {
-    title: 'Untitled (Isolation)',
-    slug: 'untitled-isolation',
-    hero_image: '/images/fire.jpg',
+    title: 'Where Nothing Happens',
+    slug: 'where-nothing-happens',
+    hero_image: '/images/where-nothing-happens-thumbnail.png',
     metadata: { duration: '14 MIN' },
     date: new Date('2026-01-01'),
   };
-  const filmImage = getThumbnail(activeFilm.hero_image || activeFilm.thumbnail || activeFilm.canonical_url || '/images/fire.jpg');
+  const filmImage = (activeFilm.slug === 'where-nothing-happens' || activeFilm.title.includes('Where Nothing')) 
+    ? '/images/where-nothing-happens-thumbnail.png' 
+    : getThumbnail(activeFilm.hero_image || activeFilm.thumbnail || activeFilm.canonical_url || '/images/where-nothing-happens-thumbnail.png');
 
   const activePoem = latestPoem || {
     title: 'Again',

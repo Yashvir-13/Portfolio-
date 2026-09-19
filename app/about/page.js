@@ -61,14 +61,18 @@ export default async function About() {
           )}
 
           <div className={`${styles.links} fade-in`} style={{ animationDelay: '1.2s' }}>
-            {settings.cv_url && <a href={settings.cv_url} target="_blank" className="text-mono">Download CV</a>}
-            {settings.email && <a href={`mailto:${settings.email}`} className="text-mono">{settings.email}</a>}
-            {!settings.cv_url && !settings.email && (
-              <>
-                <a href="#" className="text-mono">Download CV</a>
-                <a href="mailto:yashvir.126@gmail.com" className="text-mono">yashvir.126@gmail.com</a>
-              </>
+            {settings.cv_url ? (
+              <a href={settings.cv_url} target="_blank" className="text-mono">Download CV</a>
+            ) : (
+              <a href="#" className="text-mono">Download CV</a>
             )}
+            
+            <a href={`mailto:${settings.email || 'yashvir.126@gmail.com'}`} className="text-mono">
+              {settings.email || 'yashvir.126@gmail.com'}
+            </a>
+            
+            <a href="https://github.com/Yashvir-13" target="_blank" rel="noopener noreferrer" className="text-mono">GitHub</a>
+            <a href="https://www.linkedin.com/in/yashvir-s-71281228a" target="_blank" rel="noopener noreferrer" className="text-mono">LinkedIn</a>
           </div>
         </div>
       </div>
