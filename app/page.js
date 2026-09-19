@@ -162,7 +162,6 @@ export default async function Home() {
             <img src={filmImage} className={`${styles.cinemaStill} reveal-image cinematic-image`} alt={activeFilm.title} />
           )}
           <div className={styles.cinemaOverlay}>
-            <h3 className="text-title">{activeFilm.title.toUpperCase()}</h3>
             <span className="text-meta">FILM / {activeFilm.metadata?.duration || 'UNKNOWN'} / {activeFilm.date ? new Date(activeFilm.date).getFullYear() : '2026'}</span>
           </div>
         </Link>

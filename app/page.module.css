@@ -173,20 +173,14 @@
 
 .cinemaOverlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  opacity: 1; /* Make text always visible */
-  transition: opacity 1s ease;
+  bottom: 5vh;
+  right: 5vw;
+  text-align: right;
+  opacity: 1; 
   pointer-events: none;
 }
 
 .cinemaLink:hover .cinemaStill {
-  opacity: 0.6;
   filter: grayscale(0%) brightness(1.1);
   transform: scale(1.02) translateZ(0);
 }
