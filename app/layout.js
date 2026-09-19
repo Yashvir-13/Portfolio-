@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Yashvir — I make things to understand things",
+  title: "Yashvir — If any of this makes sense, let me know",
   description: "Personal archive and portfolio of Yashvir.",
 };
 

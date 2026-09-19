@@ -126,7 +126,7 @@ export default async function Home() {
       {/* SHOT 03 — STATEMENT */}
       <section className={styles.shot03}>
         <p className={`${styles.statement} fade-in`}>
-          I make things to<br/>understand things.
+          If any of this makes sense,<br/>let me know.
         </p>
       </section>
 
@@ -149,7 +149,7 @@ export default async function Home() {
       {/* SHOT 05 — INTERRUPTION */}
       <section className={styles.shot05}>
         <p className="interruption drift-up">
-          Some things are made<br/>because they cannot be explained.
+          Anyway, here we are.
         </p>
       </section>
 
@@ -235,11 +235,11 @@ export default async function Home() {
 
       {/* FOOTER */}
       <footer className={styles.footer}>
-        <p className={styles.footerStatement}>archive currently open.</p>
+        <p className={styles.footerStatement}>that's about it.</p>
         <div className={styles.footerNav}>
           <a href="https://github.com/Yashvir-13" target="_blank" rel="noopener noreferrer" className="text-mono">GitHub</a>
-          <a href="https://linkedin.com/in/yashvir" target="_blank" rel="noopener noreferrer" className="text-mono">LinkedIn</a>
-          <a href="mailto:hello@example.com" className="text-mono">Contact</a>
+          <a href="https://www.linkedin.com/in/yashvir-s-71281228a" target="_blank" rel="noopener noreferrer" className="text-mono">LinkedIn</a>
+          <a href="mailto:yashvir.126@gmail.com" className="text-mono">Contact</a>
         </div>
       </footer>
     </div>

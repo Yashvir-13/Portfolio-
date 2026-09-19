@@ -8,15 +8,28 @@ export default async function About() {
 
   const defaultAbout = `
     <p class="${styles.intro} drift-up" style="animation-delay: 0.4s">
-      I am Yashvir, a multidisciplinary creator and B.Tech student exploring the intersection of technology, art, and human experience.
+      I’m Yashvir. I study computer science, make software, take photographs, write sometimes, and have been trying to make films for longer than I’d like to admit.
+    </p>
+    <p class="${styles.body} drift-up" style="animation-delay: 0.5s">
+      I tend to jump between things. I’ll spend a week building something, get distracted by a camera, disappear into a film, and eventually come back with another idea I probably don’t have time for.
     </p>
     <p class="${styles.body} drift-up" style="animation-delay: 0.6s">
-      I build software, write poetry, take photographs, and direct films. 
-      I am less interested in the boundaries between these mediums than in what they can uncover together. 
-      My work is driven by a desire to archive memories, dissect the passage of time, and build quiet digital spaces that invite reflection.
+      I’m interested in cinema, photography, technology, writing, time, memory, and whatever else happens to keep me awake at 2 AM. I like seeing what happens when I approach the same idea from a different direction.
+    </p>
+    <p class="${styles.body} drift-up" style="animation-delay: 0.7s">
+      Most of the time, I don’t really know where something is going when I start it. Sometimes it works. Sometimes it doesn’t. Sometimes it sits around unfinished for a while and becomes something else later.
     </p>
     <p class="${styles.body} drift-up" style="animation-delay: 0.8s">
-      Currently studying computer science, I spend most of my nights experimenting with web architecture, reading editorial design books, or documenting the empty streets of the city.
+      These days, most of my nights are spent building software, reading, watching films, experimenting with whatever has caught my attention, or wandering around with a camera when the streets are quiet.
+    </p>
+    <p class="${styles.body} drift-up" style="animation-delay: 0.9s">
+      I don’t have a particularly grand plan for any of this. I’m mostly curious, and I like seeing where that takes me.
+    </p>
+    <p class="${styles.body} drift-up" style="animation-delay: 1.0s">
+      here’s who I am, what I do, and why I think I do it.
+    </p>
+    <p class="${styles.body} drift-up" style="animation-delay: 1.1s">
+      Anyway, here we are.
     </p>
   `;
 
@@ -53,7 +66,7 @@ export default async function About() {
             {!settings.cv_url && !settings.email && (
               <>
                 <a href="#" className="text-mono">Download CV</a>
-                <a href="mailto:hello@example.com" className="text-mono">hello@example.com</a>
+                <a href="mailto:yashvir.126@gmail.com" className="text-mono">yashvir.126@gmail.com</a>
               </>
             )}
           </div>
