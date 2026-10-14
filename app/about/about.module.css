@@ -138,21 +138,36 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 6rem 0 8rem;
+  }
+  .topMeta {
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
+    font-size: 0.6rem;
+  }
+  .content {
+    padding: 0 1.25rem;
+  }
   .intro {
-    font-size: clamp(2.2rem, 8vw, 3rem);
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 2.5rem;
   }
   
   .portraitWrapper {
-    width: 85%;
-    margin: 0 0 8vh auto; /* Keep it slightly off-center right */
+    width: 100%;
+    margin: 0 0 3rem 0;
   }
 
   .body {
     margin-left: 0;
     max-width: 100%;
+    font-size: 1.05rem;
+    line-height: 1.8;
   }
 
   .links {
     margin-left: 0;
+    margin-top: 2.5rem;
   }
 }

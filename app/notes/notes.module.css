@@ -46,3 +46,22 @@
   line-height: 1.1;
   max-width: 1000px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 6rem 0 10rem;
+  }
+  .topMeta {
+    padding: 0 1.25rem;
+    margin-bottom: 3.5rem;
+    font-size: 0.6rem;
+  }
+  .notesList {
+    padding: 0 1.25rem;
+    gap: 4.5rem;
+  }
+  .question {
+    font-size: clamp(1.8rem, 6.5vw, 2.75rem);
+    line-height: 1.2;
+  }
+}

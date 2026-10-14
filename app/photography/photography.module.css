@@ -68,11 +68,28 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 6rem 0 8rem;
+  }
+  .topMeta {
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
+    font-size: 0.6rem;
+  }
+  .gallery {
+    gap: 4.5rem;
+  }
   .massive, .standard, .right {
     width: 100vw;
     margin-left: 0;
   }
-  .massive .caption {
-    margin-left: 5vw;
+  .caption, .massive .caption {
+    margin-top: 1.25rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    gap: 0.5rem;
+  }
+  .captionText {
+    font-size: 1.15rem;
   }
 }

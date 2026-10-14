@@ -57,3 +57,29 @@
   font-size: 1.5rem;
   color: var(--muted);
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 6rem 0 8rem;
+  }
+  .topMeta {
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
+    font-size: 0.6rem;
+  }
+  .header {
+    padding: 0 1.25rem;
+    margin-bottom: 3rem;
+  }
+  .list {
+    padding: 0 1.25rem;
+    gap: 4rem;
+  }
+  .title {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+  .description {
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+}

@@ -40,6 +40,23 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 8rem 2rem 2rem;
+    padding: 5.5rem 1.25rem 4rem;
+  }
+  .header {
+    margin-bottom: 3rem;
+  }
+  .writingList {
+    gap: 2rem;
+  }
+  .writingItem {
+    padding: 1.25rem 0;
+  }
+  .writingItem h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .meta {
+    gap: 1rem;
+    font-size: 0.75rem;
   }
 }

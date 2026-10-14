@@ -75,3 +75,48 @@
   max-width: 600px;
   font-style: italic;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 6rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .header {
+    margin-bottom: 2.5rem;
+    padding: 0 1.25rem;
+  }
+  .cinemaContainer {
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-bottom: 2.5rem;
+    padding-bottom: 0;
+  }
+  .videoPlaceholder {
+    aspect-ratio: 16/9;
+  }
+  .videoLabel {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.65rem;
+  }
+  .contentContainer {
+    padding: 0 1.25rem 6rem;
+    gap: 2rem;
+  }
+  .metaRow {
+    gap: 1rem;
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .textColumn {
+    gap: 1.5rem;
+  }
+  .description {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+  }
+  .directorNote {
+    font-size: 0.95rem;
+  }
+}

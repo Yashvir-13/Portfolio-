@@ -193,6 +193,7 @@
   transform: translateX(0);
 }
 
+/* TABLET VIEWPORT */
 @media (max-width: 1024px) {
   .projectItem {
     grid-template-columns: 1fr;
@@ -201,20 +202,92 @@
   
   .previewContainer {
     order: -1;
-    max-height: 320px;
+    max-height: 380px;
   }
 }
 
+/* MOBILE VIEWPORT */
 @media (max-width: 768px) {
   .container {
-    padding: 8rem 1.5rem 4rem;
+    padding: 5.5rem 1.25rem 4rem;
   }
-  
+
   .header {
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
+    gap: 1rem;
   }
-  
+
+  .headerMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding-bottom: 1rem;
+    font-size: 0.6rem;
+  }
+
+  .title {
+    font-size: clamp(2.8rem, 11vw, 4.2rem);
+    line-height: 0.92;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+  }
+
   .projectItem {
-    padding: 3rem 0;
+    padding: 2.5rem 0;
+    gap: 1.5rem;
+  }
+
+  .previewContainer {
+    order: -1;
+    max-height: none;
+    aspect-ratio: 16/9;
+  }
+
+  .previewImage {
+    /* Subtle cinematic grade on touch devices where hover is absent */
+    filter: grayscale(25%) contrast(1.08) brightness(0.88);
+  }
+
+  .metaRow {
+    gap: 0.6rem;
+  }
+
+  .category {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .itemTitle {
+    font-size: clamp(1.8rem, 6.5vw, 2.5rem);
+    line-height: 1.05;
+  }
+
+  .statement {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .stackList {
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+  }
+
+  .stackBadge {
+    font-size: 0.55rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .arrowHint {
+    position: static;
+    opacity: 0.8;
+    transform: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    margin-top: 0.5rem;
+    display: inline-block;
   }
 }

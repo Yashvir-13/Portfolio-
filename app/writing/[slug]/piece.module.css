@@ -122,3 +122,38 @@
 .emptyLine {
   height: 4rem;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 6rem 1.25rem 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+  }
+  .ambientMeta {
+    position: static;
+    margin-bottom: 1.5rem;
+    font-size: 0.65rem;
+  }
+  .header {
+    margin-bottom: 3rem;
+    text-align: left;
+    width: 100%;
+  }
+  .title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    text-align: left;
+  }
+  .content {
+    width: 100%;
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+  .content.essay {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  .emptyLine {
+    height: 2rem;
+  }
+}

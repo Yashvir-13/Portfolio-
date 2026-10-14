@@ -115,10 +115,12 @@ export default async function ProjectDetail({ params }) {
         <Link href="/work" className={styles.backLink}>
           ← RETURN TO ARCHIVE
         </Link>
-        <span className="text-mono">
-          REF: {(currentIndex + 1).toString().padStart(2, '0')} / {year} / {category.toUpperCase()}
-        </span>
-        <span className="text-mono">02:17 AM</span>
+        <div className={styles.topMetaDetails}>
+          <span className="text-mono">
+            REF: {(currentIndex + 1).toString().padStart(2, '0')} / {year} / {category.toUpperCase()}
+          </span>
+          <span className="text-mono">02:17 AM</span>
+        </div>
       </div>
 
       {/* EDITORIAL HEADER */}
