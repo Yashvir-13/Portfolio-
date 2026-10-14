@@ -8,8 +8,29 @@ import { Analytics } from "@vercel/analytics/next";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Yashvir — If any of this makes sense, let me know",
-  description: "Personal archive and portfolio of Yashvir.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yashvir.me'),
+  title: {
+    default: "Yashvir — Living Archive",
+    template: "%s | Yashvir"
+  },
+  description: "Personal archive and portfolio of Yashvir: technical architectures, game-theoretic simulations, multi-agent frameworks, and computational artifacts.",
+  openGraph: {
+    title: "Yashvir — Living Archive",
+    description: "Personal archive and portfolio of Yashvir: technical architectures, game-theoretic simulations, multi-agent frameworks, and computational artifacts.",
+    url: "https://yashvir.me",
+    siteName: "Yashvir's Living Archive",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yashvir — Living Archive",
+    description: "Personal archive and portfolio of Yashvir: technical architectures, game-theoretic simulations, multi-agent frameworks, and computational artifacts.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({ children }) {

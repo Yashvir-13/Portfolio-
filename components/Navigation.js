@@ -29,13 +29,20 @@ export default function Navigation() {
         {isOpen ? 'CLOSE' : 'INDEX'}
       </button>
       <ul className={`${styles.navList} ${isOpen ? styles.open : ''}`}>
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href} className={styles.navLink} onClick={() => setIsOpen(false)}>
-              {link.label}
-            </Link>
-          </li>
-        ))}
+        {links.map((link) => {
+          const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
+          return (
+            <li key={link.href}>
+              <Link 
+                href={link.href} 
+                className={`${styles.navLink} ${isActive ? styles.active : ''}`} 
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
