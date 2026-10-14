@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yashvir.me'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yashvirafterhours.me'),
   title: {
     default: "Yashvir — Living Archive",
     template: "%s | Yashvir"
@@ -17,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: "Yashvir — Living Archive",
     description: "Personal archive and portfolio of Yashvir: technical architectures, game-theoretic simulations, multi-agent frameworks, and computational artifacts.",
-    url: "https://yashvir.me",
+    url: "https://yashvirafterhours.me",
     siteName: "Yashvir's Living Archive",
     locale: "en_US",
     type: "website",
