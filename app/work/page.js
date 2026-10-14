@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { getPublishedContent } from '@/lib/content.js';
 
 export const metadata = {
-  title: 'Work / Living Archive — Yashvir',
-  description: 'Selected technical systems, academic inquiries, and computational artifacts by Yashvir.',
+  title: 'Work & Research Systems — Yashvir Singh',
+  description: 'Selected technical systems, academic inquiries, game-theoretic multi-agent simulations, and computational artifacts by Yashvir Singh.',
 };
 
 export default async function Work() {

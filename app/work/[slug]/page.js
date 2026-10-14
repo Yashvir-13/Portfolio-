@@ -14,15 +14,16 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${project.title} — Yashvir's Living Archive`,
-    description: project.excerpt || 'Technical architecture and research project by Yashvir.',
+    title: `${project.title} — Yashvir Singh`,
+    description: project.excerpt || 'Technical architecture and research project by Yashvir Singh.',
     openGraph: {
-      title: `${project.title} — Yashvir`,
+      title: `${project.title} — Yashvir Singh`,
       description: project.excerpt,
       images: project.hero_image ? [project.hero_image] : [],
     },
   };
 }
+
 
 // Helper to format multi-line text into structured paragraphs and bullet lists
 function FormattedText({ text }) {

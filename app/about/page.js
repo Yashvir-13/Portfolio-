@@ -1,5 +1,11 @@
 import styles from './about.module.css';
 import { getSettings } from '@/lib/content.js';
+
+export const metadata = {
+  title: "About Yashvir Singh",
+  description: "About Yashvir Singh: computer science researcher, software engineer, photographer, and filmmaker.",
+};
+
 export default async function About() {
   const settings = await getSettings();
 
@@ -8,7 +14,7 @@ export default async function About() {
 
   const defaultAbout = `
     <p class="${styles.intro} drift-up" style="animation-delay: 0.4s">
-      I’m Yashvir. I study computer science, make software, take photographs, write sometimes, and have been trying to make films for longer than I’d like to admit.
+      I’m Yashvir Singh. I study computer science, make software, take photographs, write sometimes, and have been trying to make films for longer than I’d like to admit.
     </p>
     <p class="${styles.body} drift-up" style="animation-delay: 0.5s">
       I tend to jump between things. I’ll spend a week building something, get distracted by a camera, disappear into a film, and eventually come back with another idea I probably don’t have time for.
